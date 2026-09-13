@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+  <meta charset="UTF-8">
+
+  <style>
+    /* 1. Estilos para el contenedor de las estrellas */
+    .star-rating {
+      display: flex;
+      flex-direction: row-reverse; /* Pone las estrellas visualmente en orden 1 a 5 */
+      justify-content: flex-end;  /* Las alinea hacia la izquierda */
+      font-size: 30px;            /* Tamaño de las estrellas */
+    }
+
+    /* 2. Ocultamos los botones redondos del radio button */
+    .star-rating input[type="radio"] {
+      display: none;
+    }
+
+    /* 3. Color gris por defecto para las estrellas apagadas */
+    .star-rating label {
+      color: #ccc;
+      cursor: pointer; /* Hace que la flecha del mouse cambie a mano */
+    }
+
+    /* 4. Ilumina en dorado la estrella seleccionada o al pasar el mouse */
+    .star-rating label:hover,
+    .star-rating label:hover ~ label,
+    .star-rating input[type="radio"]:checked ~ label {
+      color: #ffc700;
+    }
+  </style>
+</head>
+<body>
+<title> Salchicha </title>
+<h1> La fiesta de las salchichas (2016)</h1>
+<img width="250" height="350" src="https://upload.wikimedia.org/wikipedia/en/f/f7/Sausage_Party_logo.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original" alt="Imagen 3"></a> <legend> La fiesta de las salchichas (2016) </legend>
+  <p>Califica esta película:</p>
+
+  <!-- FORMULARIO DE CALIFICACIÓN -->
+  <form class="star-rating">
+    <input type="radio" id="star5" name="rating" value="5">
+    <label for="star5">★</label>
+
+    <input type="radio" id="star4" name="rating" value="4">
+    <label for="star4">★</label>
+
+    <input type="radio" id="star3" name="rating" value="3">
+    <label for="star3">★</label>
+
+    <input type="radio" id="star2" name="rating" value="2">
+    <label for="star2">★</label>
+
+    <input type="radio" id="star1" name="rating" value="1">
+    <label for="star1">★</label>
+  </form>
+<a href="index.html"> Volver a la página principal</a>
+
+</html>
