@@ -6,6 +6,7 @@ document.getElementById("nombre").textContent = pan ? pan : "Texto";
 const sesion = localStorage.getItem("sesion");
 const todas = JSON.parse(localStorage.getItem("resenas") || "{}");
 const caja = document.getElementById("reviews");
+const titulo = document.body.dataset.titulo;
 
 caja.textContent = "";
 
@@ -26,7 +27,7 @@ if (!sesion) {
       div.className = "resena";
 
       const titulo = document.createElement("strong");
-      titulo.textContent = `${r.pelicula} · ${r.fecha}`;
+      titulo.textContent = `${r.titulo} · ${r.fecha}`;
 
       const texto = document.createElement("p");
       texto.textContent = r.texto;
