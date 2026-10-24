@@ -19,19 +19,12 @@
     <li>Película 2</li>
     <li>Película 3</li>
   </ol>
-   <section class="login">                                   <!-- recuadro de sesión -->
-      <h2 id="titulo-login">Inicia sesión</h2>                <!-- cambia a "Hola, nombre" al entrar -->
-      <form id="formLogin">                                   <!-- formulario; JS captura el envío -->
-        <input id="usuario" placeholder="Nombre de usuario" required> <!-- required = no se puede dejar vacío -->
-        <input id="clave" type="password" placeholder="Contraseña" required> <!-- type=password oculta los puntos -->
-        <button type="submit">Entrar</button>                 <!-- envía el formulario = iniciar sesión -->
-        <button type="button" id="registrar">Crear cuenta</button> <!-- type=button no envía; lo maneja JS -->
-      </form>
-      <p id="mensaje"></p>                                    <!-- aquí JS escribe errores o éxito -->
-      <button type="button" id="cuenta" hidden>Ver perfil</button>
-      <button type="button" id="salir" hidden>Cerrar sesión</button> <!-- oculto hasta iniciar sesión -->
-      <p><a href="user.html">Entrar como invitado</a></p>     <!-- acceso sin cuenta -->
-    </section>
+  <section>
+    <h2>Lista de reseñas</h2>
+    <div id="reviews">
+      
+    </div>
+  </section>
   <a class="volver" href="index.html">Volver a la página principal</a>
   <script src="user.js"></script>
 </body>
