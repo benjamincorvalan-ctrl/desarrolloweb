@@ -1,0 +1,168 @@
+:root {                                   /* :root = variables globales, se definen una vez y se usan en todo el CSS */
+  --fondo: #170505;                       /* negro rojizo del fondo (igual que el PPT) */
+  --rojo: #7a0e0e;                        /* rojo principal */
+  --rojo-oscuro: #4a0808;                 /* rojo oscuro para sombras y tarjetas */
+  --dorado: #ffc700;                      /* dorado (el mismo de las estrellas) */
+  --crema: #f3e9de;                       /* blanco cálido para textos */
+}
+
+* { box-sizing: border-box; }             /* el padding no agranda las cajas: más fácil calcular tamaños */
+
+body {                                    /* estilo de toda la página */
+  margin: 0;                              /* quita el margen blanco que trae el navegador */
+  padding: 0 60px;                        /* deja espacio a los lados para las tiras de película */
+  background: var(--fondo);               /* fondo negro rojizo usando la variable */
+  color: var(--crema);                    /* color de texto por defecto */
+  font-family: "Segoe UI", Arial, sans-serif; /* letra del texto normal (si falla una, usa la siguiente) */
+  text-align: center;                     /* centra el contenido */
+}
+
+body::before, body::after {               /* dos elementos "falsos": serán las tiras de película izq. y der. */
+  content: "";                            /* obligatorio para que el elemento exista */
+  position: fixed;                        /* quedan pegados al borde aunque se haga scroll */
+  top: 0; bottom: 0;                      /* ocupan todo el alto de la pantalla */
+  width: 38px;                            /* ancho de la tira */
+  background-color: #000;                 /* tira negra */
+  background-image: linear-gradient(to bottom, var(--crema) 14px, transparent 14px); /* dibuja un "agujerito" de 14px */
+  background-size: 14px 32px;             /* cada agujero mide 14px de ancho y se repite cada 32px */
+  background-repeat: repeat-y;            /* se repite hacia abajo */
+  background-position: center top;        /* agujeros centrados en la tira */
+}
+body::before { left: 0; }                 /* la primera tira va a la izquierda */
+body::after { right: 0; }                 /* la segunda va a la derecha */
+
+.cabecera {                               /* bloque del título */
+  margin: 30px auto;                      /* separación arriba/abajo y centrado */
+  padding: 25px;                          /* espacio interior */
+  background: var(--rojo-oscuro);         /* panel rojo oscuro como "pantalla de cine" */
+  border: 4px solid #000;                 /* marco negro */
+  border-radius: 10px;                    /* esquinas redondeadas */
+}
+.cabecera h1 {                            /* el título principal */
+  margin: 0;                              /* sin margen extra */
+  font-family: "Graduate", Impact, serif; /* tipografía de cine (Google Fonts); Impact si no carga */
+  font-size: clamp(1.8rem, 5vw, 3.5rem);  /* tamaño que se adapta: mínimo 1.8rem, máximo 3.5rem */
+  letter-spacing: 3px;                    /* separa las letras */
+  text-transform: uppercase;              /* todo en mayúsculas */
+  color: #fff;                            /* blanco puro */
+  text-shadow: 3px 3px 0 #000;            /* sombra negra estilo afiche */
+}
+.cabecera img { vertical-align: middle; margin-right: 12px; } /* el logo se alinea con el texto */
+.cabecera p { color: var(--dorado); font-style: italic; margin: 8px 0 0; } /* eslogan dorado y en cursiva */
+
+.barra {                                  /* franja de búsqueda y géneros */
+  display: flex;                           /* pone los elementos en fila */
+  flex-wrap: wrap;                         /* si no caben, bajan a la siguiente línea */
+  gap: 12px;                               /* espacio entre elementos */
+  justify-content: center;                 /* centrados */
+  margin-bottom: 30px;                     /* espacio debajo */
+}
+input, select, button {                    /* mismo estilo para campos y botones */
+  padding: 10px 14px;                      /* espacio interior */
+  border: 2px solid var(--rojo);           /* borde rojo */
+  border-radius: 6px;                      /* esquinas suaves */
+  background: #000;                        /* fondo negro */
+  color: var(--crema);                     /* texto crema */
+  font-size: 1rem;                         /* tamaño normal */
+}
+button {                                   /* botones */
+  background: var(--rojo);                 /* rojo sólido */
+  cursor: pointer;                         /* manito al pasar el mouse */
+  font-weight: bold;                       /* texto en negrita */
+}
+button:hover { background: var(--dorado); color: #000; } /* al pasar el mouse se vuelve dorado */
+a { color: var(--dorado); }                /* los enlaces son dorados */
+
+h2 {                                       /* subtítulos de sección */
+  font-family: "Graduate", Impact, serif;  /* misma tipografía de cine */
+  text-transform: uppercase;               /* mayúsculas */
+  letter-spacing: 2px;                     /* letras separadas */
+}
+
+.carrusel-caja {                           /* contiene flechas + carrusel */
+  display: flex;                           /* flecha, lista, flecha en fila */
+  align-items: center;                     /* alineadas al centro vertical */
+  gap: 10px;                               /* espacio entre ellos */
+}
+.carrusel {                                /* la lista horizontal de películas */
+  display: flex;                           /* tarjetas una al lado de otra */
+  gap: 20px;                               /* espacio entre tarjetas */
+  overflow-x: auto;                        /* scroll horizontal cuando no caben */
+  scroll-snap-type: x mandatory;           /* al deslizar, se "pega" a cada tarjeta */
+  scroll-behavior: smooth;                 /* desplazamiento suave */
+  padding: 15px;                           /* aire alrededor */
+  flex: 1;                                 /* ocupa el espacio libre entre las flechas */
+}
+.tarjeta {                                 /* cada película */
+  flex: 0 0 240px;                         /* ancho fijo de 240px, no se encoge */
+  scroll-snap-align: center;               /* punto donde se "pega" al deslizar */
+  background: var(--rojo-oscuro);          /* fondo rojo oscuro */
+  border: 4px solid #000;                  /* marco negro de "fotograma" */
+  padding: 8px;                            /* espacio entre marco y afiche */
+  text-decoration: none;                   /* sin subrayado */
+  color: var(--crema);                     /* texto crema */
+  transition: transform 0.3s;              /* animación suave al agrandarse */
+}
+.tarjeta:hover { transform: scale(1.06); border-color: var(--dorado); } /* al pasar el mouse: crece y borde dorado */
+.tarjeta img { width: 100%; height: 330px; object-fit: cover; display: block; } /* afiche del mismo tamaño sin deformarse */
+.tarjeta span { display: block; margin-top: 8px; font-weight: bold; } /* título bajo el afiche */
+.flecha { font-size: 1.6rem; padding: 6px 14px; } /* flechas ‹ › más grandes */
+
+.login {                                   /* recuadro de inicio de sesión */
+  max-width: 420px;                        /* ancho máximo */
+  margin: 40px auto;                       /* centrado con espacio arriba/abajo */
+  padding: 20px;                           /* espacio interior */
+  background: var(--rojo-oscuro);          /* fondo rojo oscuro */
+  border: 4px solid #000;                  /* marco negro */
+  border-radius: 10px;                     /* esquinas redondeadas */
+}
+.login input { width: 100%; margin-bottom: 10px; } /* campos de ancho completo, separados */
+#mensaje { min-height: 1.4em; color: var(--dorado); font-weight: bold; } /* mensaje de error/éxito (reserva su espacio) */
+
+footer { margin: 40px 0 20px; padding-top: 15px; border-top: 2px solid var(--rojo); font-size: 0.9rem; } /* pie con línea roja arriba */
+
+/* ===== PÁGINAS INTERNAS: fichas de película y perfil ===== */
+main { max-width: 1200px; margin: 0 auto; }            /* en pantallas gigantes el contenido no pasa de 1200px */
+img { max-width: 100%; }                                /* ninguna imagen se sale de su caja */
+.ficha { max-width: 420px; margin: 30px auto; padding: 20px; background: var(--rojo-oscuro); border: 4px solid #000; border-radius: 10px; } /* tarjeta de la película */
+.ficha img { width: 100%; max-width: 300px; height: auto; border: 4px solid #000; } /* afiche con marco, se achica en pantallas chicas */
+.star-rating { display: flex; flex-direction: row-reverse; justify-content: center; font-size: 36px; } /* estrellas en fila, centradas (row-reverse = orden 1 a 5) */
+.star-rating input { display: none; }                   /* oculta los botoncitos redondos */
+.star-rating label { color: #555; cursor: pointer; }    /* estrella apagada en gris */
+.star-rating label:hover, .star-rating label:hover ~ label, .star-rating input:checked ~ label { color: var(--dorado); } /* se ilumina al pasar el mouse o elegir */
+.perfil { max-width: 420px; margin: 30px auto; padding: 20px; background: var(--rojo-oscuro); border: 4px solid #000; border-radius: 10px; } /* tarjeta del perfil */
+.avatar { width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--dorado); object-fit: cover; } /* foto redonda con borde dorado */
+.favoritos { max-width: 420px; margin: 0 auto; padding-left: 0; list-style-position: inside; } /* lista de favoritos */
+.favoritos li { background: var(--rojo-oscuro); border-left: 4px solid var(--dorado); margin: 8px 0; padding: 10px; text-align: left; } /* cada favorito como franja */
+.volver { display: inline-block; margin: 25px 0; }     /* enlace de regreso con espacio alrededor */
+
+/* ===== ADAPTACIÓN A DISTINTAS PANTALLAS ===== */
+@media (min-width: 1400px) {                            /* pantallas muy grandes */
+  .tarjeta { flex-basis: 280px; }                       /* tarjetas más anchas */
+  .tarjeta img { height: 380px; }                       /* afiches más altos */
+}
+@media (max-width: 900px) {                             /* tablets */
+  .tarjeta { flex-basis: 210px; }                       /* tarjetas un poco más chicas */
+  .tarjeta img { height: 280px; }                       /* afiches más bajos */
+}
+@media (max-width: 600px) {                             /* celulares */
+  body { padding: 0 30px; }                             /* menos espacio lateral */
+  body::before, body::after { width: 22px; background-size: 9px 24px; background-image: linear-gradient(to bottom, var(--crema) 10px, transparent 10px); } /* tiras más finas */
+  .cabecera { padding: 15px; margin: 20px auto; }       /* título más compacto */
+  .barra > * { width: 100%; }                           /* búsqueda y género ocupan todo el ancho */
+  .tarjeta { flex-basis: 180px; }                       /* tarjetas chicas para ver la siguiente asomándose */
+  .tarjeta img { height: 240px; }                       /* afiches más bajos */
+  .flecha { display: none; }                            /* en el celular se desliza con el dedo, sin flechas */
+  .star-rating { font-size: 30px; }                     /* estrellas un poco más chicas */
+}
+
+/* ===== RESEÑAS ===== */
+[hidden] { display: none !important; }                  /* el atributo hidden siempre oculta, aunque otro CSS diga lo contrario */
+textarea { width: 100%; padding: 10px; border: 2px solid var(--rojo); border-radius: 6px; background: #000; color: var(--crema); font-size: 1rem; font-family: inherit; resize: vertical; margin-bottom: 10px; } /* caja de texto con el mismo estilo que los campos */
+.resenas { max-width: 600px; margin: 30px auto; padding: 20px; background: var(--rojo-oscuro); border: 4px solid #000; border-radius: 10px; text-align: left; } /* tarjeta que contiene las reseñas */
+.resena { border-left: 4px solid var(--dorado); background: #000; padding: 10px 14px; margin: 10px 0; } /* cada reseña, con franja dorada */
+.resena strong { color: var(--dorado); }                /* autor y fecha en dorado */
+.resena p { margin: 6px 0; white-space: pre-wrap; overflow-wrap: anywhere; } /* respeta saltos de línea y corta palabras largas */
+
+/* ===== LOGO ===== */
+.logo { height: 70px; width: auto; background: var(--crema); border-radius: 12px; padding: 6px; vertical-align: middle; margin-right: 12px; } /* el logo es negro: se pone sobre un fondo crema para que se vea en el fondo oscuro */

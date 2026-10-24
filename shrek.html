@@ -1,59 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-  <meta charset="UTF-8">
-
-  <style>
-    /* 1. Estilos para el contenedor de las estrellas */
-    .star-rating {
-      display: flex;
-      flex-direction: row-reverse; /* Pone las estrellas visualmente en orden 1 a 5 */
-      justify-content: flex-end;  /* Las alinea hacia la izquierda */
-      font-size: 30px;            /* Tamaño de las estrellas */
-    }
-
-    /* 2. Ocultamos los botones redondos del radio button */
-    .star-rating input[type="radio"] {
-      display: none;
-    }
-
-    /* 3. Color gris por defecto para las estrellas apagadas */
-    .star-rating label {
-      color: #ccc;
-      cursor: pointer; /* Hace que la flecha del mouse cambie a mano */
-    }
-
-    /* 4. Ilumina en dorado la estrella seleccionada o al pasar el mouse */
-    .star-rating label:hover,
-    .star-rating label:hover ~ label,
-    .star-rating input[type="radio"]:checked ~ label {
-      color: #ffc700;
-    }
-  </style>
+<head>
+  <meta charset="UTF-8">                                      <!-- tildes y ñ -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- se adapta al celular -->
+  <title>Shrek</title>                                           <!-- texto de la pestaña -->
+  <link href="https://fonts.googleapis.com/css2?family=Graduate&display=swap" rel="stylesheet"> <!-- tipografía de títulos -->
+  <link rel="stylesheet" href="estilo.css">                   <!-- estilos compartidos -->
 </head>
-<body>
-<title> Shrek </title>
-<h1> Shrek (2001)</h1>
-<img width="250" height="350" src="https://m.media-amazon.com/images/M/MV5BN2FkMTRkNTUtYTI0NC00ZjI4LWI5MzUtMDFmOGY0NmU2OGY1XkEyXkFqcGc@._V1_.jpg" alt="Imagen 1"></a> <legend> Shrek (2001) </legend> 
-  <p>Califica esta película:</p>
-
-  <!-- FORMULARIO DE CALIFICACIÓN -->
-  <form class="star-rating">
-    <input type="radio" id="star5" name="rating" value="5">
-    <label for="star5">★</label>
-
-    <input type="radio" id="star4" name="rating" value="4">
-    <label for="star4">★</label>
-
-    <input type="radio" id="star3" name="rating" value="3">
-    <label for="star3">★</label>
-
-    <input type="radio" id="star2" name="rating" value="2">
-    <label for="star2">★</label>
-
-    <input type="radio" id="star1" name="rating" value="1">
-    <label for="star1">★</label>
-  </form>
-<a href="index.html"> Volver a la página principal</a>
-
+<body data-pelicula="shrek">
+  <header class="cabecera"><h1>Shrek (2001)</h1></header>               <!-- título de la película -->
+  <section class="ficha">                                     <!-- tarjeta con afiche y estrellas -->
+    <img src="https://m.media-amazon.com/images/M/MV5BN2FkMTRkNTUtYTI0NC00ZjI4LWI5MzUtMDFmOGY0NmU2OGY1XkEyXkFqcGc@._V1_.jpg" alt="Shrek"> <!-- afiche -->
+    <p>Califica esta película:</p>
+    <form class="star-rating">                                <!-- las estrellas se ordenan con CSS -->
+      <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+      <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+      <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+      <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+      <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+    </form>
+  </section>
+  <section class="resenas">                                   <!-- tarjeta de reseñas -->
+    <h2>Reseñas</h2>
+    <form id="formResena" hidden>                             <!-- solo se muestra con sesión iniciada (lo decide resenas.js) -->
+      <textarea name="texto" rows="4" maxlength="500" placeholder="Escribe tu reseña..." required></textarea> <!-- máx. 500 letras -->
+      <button type="submit">Publicar reseña</button>
+    </form>
+    <p id="avisoResena">Inicia sesión para escribir una reseña. <a href="index.html">Ir a iniciar sesión</a></p> <!-- se muestra sin sesión -->
+    <div id="listaResenas"></div>                             <!-- aquí aparecen las reseñas -->
+  </section>
+  <a class="volver" href="index.html">Volver a la página principal</a>
+  <script src="resenas.js"></script>                         <!-- lógica de reseñas -->
+</body>
 </html>
