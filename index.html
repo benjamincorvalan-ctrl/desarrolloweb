@@ -1,65 +1,78 @@
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <style>
-        /*Para que se forme la tabla con el diseño de celdas (tecnicamente css?)*/
-  table, th, td {
-    margin-left: 525px; /*Probablemente este horrible en resoluciones distintas*/
-    text-align: center;
-    border: 1px solid black;
-    border-collapse: collapse;
-    padding: 8px;              
-  }
-  list, li{
-    display:grid;
-    width:100px;
-  }
-  </style>
-  
-</head>
-<title> Página principal </title>
-<h1> <img width="150" height="50" src="logo.png" alt="Logo"> Peliculas épicas 777 </h1>
-<h2> Donde la magia del cine es mágica </h2>
-<br>
-<body>
-    Barra de búsqueda <input>
-    Géneros
-<select id="generos" name="generos" required>
-<option> ...
-<option> Accion 
-<option> Fantasia
-<option> Suspenso
-<option> Terror
-</select>
-<br>
-<h2> <a href="catalogo.html"> Catálogo de películas </a> </h2>
-<h2 style="text-align: center"> Peliculas populares de la semana </h2>
-<table>
-  <tr>
-    <td> <a href="shrek.html"><img width="250" height="350" src="https://m.media-amazon.com/images/M/MV5BN2FkMTRkNTUtYTI0NC00ZjI4LWI5MzUtMDFmOGY0NmU2OGY1XkEyXkFqcGc@._V1_.jpg" alt="Imagen 1"></a> <legend> Shrek (2001) </legend> </td>
-    <td> <a href="minion.html"><img width="250" height="350" src="https://m.media-amazon.com/images/I/81ffeOxg3gL._AC_UF1000,1000_QL80_.jpg" alt="Imagen 2"></a> <legend> Minions: Nace un villano (2022) </legend> </td>
-    <td> <a href="salchicha.html"><img width="250" height="350" src="https://upload.wikimedia.org/wikipedia/en/f/f7/Sausage_Party_logo.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original" alt="Imagen 3"></a> <legend> La fiesta de las salchichas (2016) </legend> </td>
-  </tr>
-</table>
-<h2 style="text-align: center"> Actores mas buscados </h2>
-<table>
-  <tr>
-    <td> <a href="https://www.imdb.com/name/nm0001191/?ref_=fn_t_1"><img width="250" height="350" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_IUAbpgxUZHfQ3XoWXLPucCLO867XX9z7G8CKnRfy6w&s" alt="Imagen 1"></a> <legend> Adam Sandler </legend> </td>
-    <td> <a href="https://www.imdb.com/es-es/name/nm0000120/"><img width="250" height="350" src="https://m.media-amazon.com/images/M/MV5BMTQwMjAwNzI0M15BMl5BanBnXkFtZTcwOTY1MTMyOQ@@._V1_.jpg" alt="Imagen 2"></a> <legend> Jim Carrey </legend> </td>
-    <td> <a href="https://www.imdb.com/es-es/name/nm0148418/?ref_=nv_sr_srsg_0_tt_4_nm_4_in_0_q_michael%20cera"><img width="250" height="350" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL7SOS4LzIOrRZ96ev78KIVe3S8hatdmPxj91p6jZHIx5MKsVMwraNwF1ji7ksDnrARyKnNLW0YVASvJPWWwKdgHIm4VYsTgEQeia4fITH0A&s=10" alt="Imagen 3"></a> <legend> Michael Cera </legend> </td>
-  </tr>
-</table>
+<!DOCTYPE html>                                              <!-- avisa que es un documento HTML5 -->
+<html lang="es">                                              <!-- página en español -->
+<head>                                                        <!-- datos invisibles de la página -->
+  <meta charset="UTF-8">                                      <!-- para que se vean tildes y ñ -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- se adapta al celular -->
+  <title>Películas épicas 777</title>                         <!-- texto de la pestaña -->
+  <link href="https://fonts.googleapis.com/css2?family=Graduate&display=swap" rel="stylesheet"> <!-- carga la tipografía de títulos -->
+  <link rel="stylesheet" href="estilo.css">                  <!-- conecta el archivo CSS -->
 
-<h2> Registrate para publicar reseñas </h2>
-<list>
-<li>Nombre de usuario <input> </li>
-<li> Contraseña <input type="password"></li>
-</list>
-<h5>No tienes cuenta? <a href="user.html">Entra como invitado</h5></a>
+  <style>
+    .tarjeta.oculto{
+      display: none !important;
+    }
+  </style>
+</head>
+<body>                                                        <!-- todo lo visible -->
+  <header class="cabecera">                                   <!-- bloque del título (clase = nombre para el CSS) -->
+    <h1><img class="logo" src="logo.png" alt="Logo CineBit">Películas épicas 777</h1> <!-- título principal con logo -->
+    <p>Donde la magia del cine es mágica</p>                  <!-- eslogan -->
+  </header>
+
+  <nav class="barra">                                         <!-- barra de búsqueda y géneros -->
+    <input type="search" id = "inputBusqueda" placeholder="Buscar película...">    <!-- campo de búsqueda -->
+    <select id = "selectGenero">                                                  <!-- lista desplegable de géneros -->
+      <option value = "todos">Todos los géneros</option>                      <!-- opción por defecto -->
+      <optio value = "accion">Acción</option>                                 <!-- género -->
+      <option value = "fantasia">Fantasía</option>                               <!-- género -->
+      <option value = "suspenso">Suspenso</option>                               <!-- género -->
+      <option value = "terror">Terror</option>                                 <!-- género -->
+      <option value = "comedia"> Comedia</option>
+    </select>
+    <a href="catalogo.html">Catálogo de películas</a>         <!-- enlace al catálogo -->
+  </nav>
+
+  <main>                                                      <!-- contenido principal -->
+    <h2>Películas populares de la semana</h2>                 <!-- subtítulo -->
+    <div class="carrusel-caja">                               <!-- contiene flechas y carrusel -->
+      <button class="flecha" id="izq">‹</button>              <!-- flecha izquierda (id para usarla en JS) -->
+      <div class="carrusel" id="carrusel">                    <!-- lista horizontal -->
+        <a class="tarjeta" href="shrek.html" data-titulo = "shrek" data-genero = "fantasia comedia">                 <!-- tarjeta: toda es un enlace a la ficha -->
+          <img src="https://m.media-amazon.com/images/M/MV5BN2FkMTRkNTUtYTI0NC00ZjI4LWI5MzUtMDFmOGY0NmU2OGY1XkEyXkFqcGc@._V1_.jpg" alt="Shrek"> <!-- afiche -->
+          <span>Shrek (2001)</span>                           <!-- título bajo el afiche -->
+        </a>
+        <a class="tarjeta" href="minion.html" data-titulo = "minions nace un villano" data-genero = "comedia accion">                <!-- segunda tarjeta -->
+          <img src="https://m.media-amazon.com/images/I/81ffeOxg3gL._AC_UF1000,1000_QL80_.jpg" alt="Minions"> <!-- afiche -->
+          <span>Minions: Nace un villano (2022)</span>        <!-- título -->
+        </a>
+        <a class="tarjeta" href="salchicha.html" data-titulo = "la fiesta de las salchichas" data-genero = "comedia">             <!-- tercera tarjeta -->
+          <img src="https://upload.wikimedia.org/wikipedia/en/f/f7/Sausage_Party_logo.png" alt="La fiesta de las salchichas"> <!-- afiche -->
+          <span>La fiesta de las salchichas (2016)</span>     <!-- título -->
+        </a>                                                  <!-- para más películas, copia una tarjeta completa -->
+      </div>
+      <button class="flecha" id="der">›</button>              <!-- flecha derecha -->
+    </div>
+
+    <section class="login">                                   <!-- recuadro de sesión -->
+      <h2 id="titulo-login">Inicia sesión</h2>                <!-- cambia a "Hola, nombre" al entrar -->
+      <form id="formLogin">                                   <!-- formulario; JS captura el envío -->
+        <input id="usuario" placeholder="Nombre de usuario" required> <!-- required = no se puede dejar vacío -->
+        <input id="clave" type="password" placeholder="Contraseña" required> <!-- type=password oculta los puntos -->
+        <button type="submit">Entrar</button>                 <!-- envía el formulario = iniciar sesión -->
+        <button type="button" id="registrar">Crear cuenta</button> <!-- type=button no envía; lo maneja JS -->
+      </form>
+      <p id="mensaje"></p>                                    <!-- aquí JS escribe errores o éxito -->
+      <button type="button" id="cuenta" hidden>Ver perfil</button>
+      <button type="button" id="salir" hidden>Cerrar sesión</button> <!-- oculto hasta iniciar sesión -->
+      <p><a href="user.html">Entrar como invitado</a></p>     <!-- acceso sin cuenta -->
+    </section>
+  </main>
+
+  <footer>                                                    <!-- pie de página -->
+    <a href="about.html">Más información sobre la página</a>  <!-- enlace a "Quiénes somos" -->
+    <p>Películas épicas 2026</p>                              <!-- derechos -->
+  </footer>
+
+  <script src="todo.js"></script>
 </body>
-<footer> 
-  <h5> <a href="about.html"> Mas información sobre la página</a> </h5>
-  <h5> Peliculas épicas 2026-2026 </h5>
-</footer>
 </html>
