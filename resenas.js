@@ -18,6 +18,7 @@ if (cab) {                                                // si existe el panel 
 
 // ---------- 2. DATOS DE LA PÁGINA ----------
 const peli = document.body.dataset.pelicula;              // nombre de la película, desde <body data-pelicula="...">
+const tituloPeli = document.body.dataset.titulo;
 const sesion = localStorage.getItem("sesion");            // usuario con sesión iniciada (null si no hay)
 const todas = JSON.parse(localStorage.getItem("resenas") || "{}"); // todas las reseñas guardadas, agrupadas por película
 const lista = todas[peli] || [];                          // reseñas de ESTA película
@@ -137,7 +138,8 @@ form.onsubmit = (e) => {                                  // al publicar la rese
     autor: sesion,                                        // quién la escribió
     estrellas: Number(marcada.value),                     // cuántas estrellas puso (1 a 5)
     texto: t,                                             // el comentario
-    fecha: new Date().toLocaleDateString("es-CL")         // fecha de hoy
+    fecha: new Date().toLocaleDateString("es-CL"),         // fecha de hoy
+    tituloPeli
   });
   guardar();                                              // guarda en el navegador
   form.reset();                                           // limpia estrellas y caja de texto
