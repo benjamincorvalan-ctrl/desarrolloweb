@@ -139,7 +139,7 @@ form.onsubmit = (e) => {                                  // al publicar la rese
     estrellas: Number(marcada.value),                     // cuántas estrellas puso (1 a 5)
     texto: t,                                             // el comentario
     fecha: new Date().toLocaleDateString("es-CL"),         // fecha de hoy
-    tituloPeli
+    titulo: tituloPeli
   });
   guardar();                                              // guarda en el navegador
   form.reset();                                           // limpia estrellas y caja de texto

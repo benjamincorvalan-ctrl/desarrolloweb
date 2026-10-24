@@ -27,7 +27,7 @@ if (!sesion) {
       div.className = "resena";
 
       const titulo = document.createElement("strong");
-      titulo.textContent = `${r.titulo || r.pelicula} · ${r.fecha}`;
+      titulo.textContent = `${r.titulo} · ${r.fecha}`;
 
       const texto = document.createElement("p");
       texto.textContent = r.texto;
