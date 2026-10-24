@@ -166,3 +166,300 @@ textarea { width: 100%; padding: 10px; border: 2px solid var(--rojo); border-rad
 
 /* ===== LOGO ===== */
 .logo { height: 70px; width: auto; background: var(--crema); border-radius: 12px; padding: 6px; vertical-align: middle; margin-right: 12px; } /* el logo es negro: se pone sobre un fondo crema para que se vea en el fondo oscuro */
+
+/* ===== NUEVO DISEÑO: PORTADA A LA IZQUIERDA, TRÁILER A LA DERECHA ===== */
+.detalle-pelicula {
+  display: grid;                           /* grid organiza los elementos en columnas. */
+  grid-template-columns: minmax(250px, 360px) minmax(0, 1fr); /* izquierda para el afiche, derecha flexible. */
+  gap: 24px;                               /* separación entre ambas columnas. */
+  align-items: start;                      /* ambas cajas comienzan a la misma altura. */
+  max-width: 1100px;                       /* evita que el diseño se estire demasiado. */
+  margin: 30px auto;                       /* centra el conjunto y lo separa de los títulos. */
+}
+
+.detalle-pelicula .ficha {
+  width: 100%;                             /* la ficha ocupa el ancho disponible de su columna. */
+  max-width: none;                         /* quita el límite previo de 420px solo en este diseño. */
+  margin: 0;                               /* el grid se encarga de ubicarla. */
+}
+
+.panel-trailer {
+  min-width: 0;                            /* permite que el video se encoja sin desbordarse. */
+  padding: 20px;                           /* espacio interior alrededor del video y texto. */
+  background: var(--rojo-oscuro);          /* mismo color de fondo que la ficha. */
+  border: 4px solid #000;                  /* marco negro como el resto de la página. */
+  border-radius: 10px;                     /* esquinas redondeadas. */
+  text-align: left;                        /* la sinopsis se lee alineada a la izquierda. */
+}
+
+.panel-trailer h2 {
+  margin: 0 0 15px;                        /* elimina espacio arriba y deja espacio debajo del título. */
+  color: var(--dorado);                    /* resalta la palabra TRÁILER con dorado. */
+  text-align: center;                      /* centra el título encima del video. */
+}
+
+.video-responsive {
+  width: 100%;                             /* usa todo el ancho de la columna derecha. */
+  aspect-ratio: 16 / 9;                    /* mantiene el formato horizontal típico de YouTube. */
+  overflow: hidden;                        /* nada se sale de las esquinas del marco. */
+  background: #000;                        /* fondo negro mientras carga YouTube. */
+  border: 4px solid #000;                  /* agrega un borde oscuro alrededor. */
+  border-radius: 8px;                      /* redondea las esquinas. */
+}
+
+.video-responsive iframe {
+  display: block;                          /* evita espacio sobrante debajo del video. */
+  width: 100%;                             /* ajusta el reproductor al contenedor. */
+  height: 100%;                            /* ajusta la altura al formato 16:9. */
+  border: 0;                               /* elimina el borde que puede traer el iframe. */
+}
+
+.enlace-youtube {
+  margin: 12px 0 0;                       /* separa el enlace del reproductor. */
+  font-size: 0.95rem;                      /* lo deja un poco más pequeño que el texto principal. */
+}
+
+.sinopsis {
+  margin-top: 20px;                       /* separa la sinopsis del enlace al tráiler. */
+}
+
+.sinopsis h3 {
+  color: var(--dorado);                    /* usa dorado para distinguir el subtítulo. */
+  margin: 0 0 8px;                         /* un poco de espacio antes del párrafo. */
+}
+
+.sinopsis p {
+  margin: 0;                               /* quita el margen extra del párrafo. */
+  line-height: 1.6;                       /* separa las líneas para facilitar la lectura. */
+}
+
+/* En tabletas angostas y celulares, el diseño cambia a una sola columna. */
+@media (max-width: 800px) {
+  .detalle-pelicula {
+    grid-template-columns: minmax(0, 1fr);/* una sola columna: portada arriba y video abajo. */
+    gap: 18px;                            /* separación vertical. */
+  }
+
+  .detalle-pelicula .ficha {
+    max-width: 420px;                      /* evita que el afiche sea demasiado grande en celular. */
+    margin: 0 auto;                        /* centra el recuadro del afiche. */
+  }
+
+  .panel-trailer {
+    width: 100%;                           /* el tráiler ocupa el ancho disponible de la pantalla. */
+  }
+}
+
+
+/* ===== CINEBIT: LOGIN COMPACTO SIN MOVER EL LOGO NI EL TÍTULO ===== */
+.cabecera-inicio {
+  display: block;                          /* El título ocupa toda la cabecera, sin dividirse en columnas. */
+  position: relative;                      /* Permite ubicar la cajita respecto de la cabecera. */
+  min-height: 248px;                       /* Deja altura para la cajita sin tapar el contenido siguiente. */
+  text-align: center;                      /* Conserva el logo, título y eslogan centrados. */
+}
+.marca-inicio {
+  width: 100%;                             /* La marca ya no comparte columna con el inicio de sesión. */
+  min-width: 0;                            /* Se adapta cuando el ancho de pantalla es pequeño. */
+}
+.cabecera-inicio .login {
+  position: absolute;                      /* Se coloca en una esquina sin empujar al título. */
+  top: 10px;                               /* Pequeña separación desde el borde superior. */
+  right: 10px;                             /* Se pega a la esquina superior derecha de la cabecera. */
+  width: 215px;                            /* Cajita mucho más angosta que la anterior. */
+  max-width: calc(100% - 20px);           /* Evita desbordarse en pantallas angostas. */
+  margin: 0;                               /* Anula el centrado original de .login. */
+  padding: 10px;                           /* Menos espacio interior para compactarla. */
+  border-width: 2px;                       /* Borde más delgado que el login anterior. */
+  text-align: center;                      /* Centra el título del formulario. */
+  z-index: 2;                              /* La cajita se mantiene por encima del fondo. */
+}
+.cabecera-inicio .login h2 {
+  font-size: .95rem;                       /* Título pequeño: «Inicia sesión». */
+  letter-spacing: .5px;                    /* Menos separación entre letras. */
+  margin: 0 0 7px;                         /* Reduce espacio debajo del título. */
+}
+.cabecera-inicio .login form {
+  display: flex;                           /* Organiza campos y botones de forma compacta. */
+  flex-wrap: wrap;                         /* Los controles pasan a otra línea si hace falta. */
+  gap: 6px;                                /* Separación pequeña entre controles. */
+}
+.cabecera-inicio .login input {
+  width: 100%;                             /* Cada entrada ocupa una línea completa. */
+  min-width: 0;                            /* Impide que el campo desborde su cajita. */
+  margin: 0;                               /* El espacio entre campos lo controla «gap». */
+  padding: 7px 8px;                        /* Campos menos altos y anchos por dentro. */
+  font-size: .8rem;                        /* Texto de los campos más compacto. */
+}
+.cabecera-inicio .login button {
+  flex: 1 1 auto;                          /* Los botones comparten una misma fila si caben. */
+  margin: 0;                               /* Evita márgenes adicionales. */
+  padding: 7px 6px;                        /* Botones pequeños pero accesibles. */
+  font-size: .78rem;                       /* Letras adecuadas al ancho de la caja. */
+}
+.cabecera-inicio .login p {
+  font-size: .76rem;                       /* Mensaje e invitado con letra más pequeña. */
+  margin: 6px 0 0;                         /* Poco espacio entre texto y controles. */
+}
+.cabecera-inicio .login #mensaje {
+  min-height: 0;                           /* No deja un hueco cuando no hay mensaje. */
+}
+.cabecera-inicio .login #mensaje:empty {
+  display: none;                           /* El mensaje vacío no utiliza espacio. */
+}
+/* En pantallas medianas, evita superponer la cajita con el título largo. */
+@media (max-width: 1550px) {
+  .cabecera-inicio {
+    min-height: 0;                         /* La altura vuelve a depender de su contenido. */
+  }
+  .cabecera-inicio .login {
+    position: static;                      /* Se ubica debajo del título para evitar cubrirlo. */
+    margin: 14px 0 0 auto;                 /* Sigue alineada a la derecha. */
+  }
+}
+/* En celular, el logo/título sigue centrado y el formulario sigue siendo pequeño. */
+@media (max-width: 600px) {
+  .cabecera-inicio .login {
+    width: min(215px, 100%);              /* Nunca supera el ancho disponible. */
+    margin-left: auto;                    /* Alinea el formulario a la derecha. */
+  }
+}
+
+/* ===== CINEBIT: FLECHA DE INICIO FIJA EN PÁGINAS INTERNAS ===== */
+body.pagina-interna {
+  padding-top: 60px;                          /* Reserva espacio arriba para que la flecha no tape los títulos. */
+}
+.volver-inicio-superior {
+  position: fixed;                            /* Permanece visible aunque el usuario baje a leer reseñas. */
+  top: 12px;                                  /* Distancia al borde superior. */
+  left: 52px;                                 /* Se ubica después de la tira de película izquierda. */
+  z-index: 50;                                /* Queda por encima del contenido al desplazarse. */
+  display: inline-flex;                       /* Alinea la flecha y la palabra Inicio. */
+  align-items: center;                        /* Centra la flecha con el texto verticalmente. */
+  gap: 8px;                                   /* Deja un espacio entre la flecha y el texto. */
+  padding: 9px 13px;                          /* Da tamaño de botón al enlace. */
+  border: 2px solid var(--dorado);           /* Borde dorado que combina con la web. */
+  border-radius: 8px;                         /* Bordes redondeados. */
+  background: var(--rojo-oscuro);             /* Fondo rojo oscuro, como tus fichas. */
+  color: var(--crema);                        /* Texto claro para que se lea bien. */
+  font-size: 0.9rem;                          /* Texto compacto. */
+  font-weight: bold;                          /* Destaca la navegación. */
+  text-decoration: none;                      /* Quita el subrayado de los enlaces. */
+  box-shadow: 0 3px 12px #0009;              /* Sombra que separa el botón del contenido. */
+}
+.volver-inicio-superior:hover,
+.volver-inicio-superior:focus-visible {
+  background: var(--dorado);                 /* Cambia el fondo al acercar el cursor o usar teclado. */
+  color: #000;                                /* Oscurece el texto para dar contraste. */
+}
+.volver-inicio-superior span {
+  font-size: 1.25rem;                         /* Hace la flecha un poco más grande que la palabra. */
+  line-height: 1;                             /* Evita que agrande demasiado la altura. */
+}
+@media (max-width: 600px) {
+  .volver-inicio-superior {
+    left: 30px;                               /* En celular deja atrás la tira de película más angosta. */
+    top: 9px;                                 /* Acerca el botón a la parte superior. */
+  }
+}
+
+/* ===== CARRUSEL SIN LA BARRA BLANCA (CONSERVA FLECHAS Y DESLIZAMIENTO) ===== */
+.carrusel {
+  scrollbar-width: none;                     /* Oculta la barra en Firefox. */
+  -ms-overflow-style: none;                  /* Compatibilidad con versiones antiguas de Edge. */
+}
+.carrusel::-webkit-scrollbar {
+  display: none;                             /* Oculta la barra en Chrome, Safari y Edge modernos. */
+}
+
+
+/* ===== FICHAS: PORTADA - TRÁILER GRANDE - RESEÑAS ===== */
+/* Estas reglas solo afectan las páginas que tienen .detalle-pelicula. */
+.detalle-pelicula {
+  display: grid; /* Organiza las tres tarjetas horizontalmente. */
+  grid-template-columns: minmax(220px, 310px) 640px minmax(220px, 310px);
+  /* La columna central mide 640 px; las laterales se adaptan a ella. */
+  justify-content: center; /* Centra todas las columnas en la página. */
+  align-items: stretch; /* Las tres tarjetas alcanzan la altura de la más alta. */
+  gap: 20px; /* Espacio entre las tarjetas. */
+  width: 100%; /* Utiliza el espacio disponible sin salirse de la pantalla. */
+  max-width: 1320px; /* Limita el conjunto para que no quede demasiado extendido. */
+  margin: 30px auto; /* Centra el conjunto y deja espacio vertical. */
+}
+
+/* Igualar el ancho de las tres tarjetas dentro de sus columnas. */
+.detalle-pelicula > .ficha,
+.detalle-pelicula > .panel-trailer,
+.detalle-pelicula > .resenas {
+  width: 100%; /* Ocupa el ancho completo de cada columna. */
+  max-width: none; /* Elimina los límites anteriores de ficha y reseñas. */
+  min-width: 0; /* Permite que el texto se acomode sin desbordarse. */
+  margin: 0; /* Evita que un margen aparte desalineé las tarjetas. */
+  align-self: stretch; /* Mantiene la misma altura visual en la fila. */
+}
+
+/* Portada: conserva su proporción y no se sale de su tarjeta. */
+.detalle-pelicula > .ficha img {
+  max-width: 100%; /* Permite reducir el afiche cuando haga falta. */
+  height: auto; /* No deforma la imagen. */
+}
+
+/* El tráiler mantiene el formato de pantalla ancha 16:9. */
+.detalle-pelicula .video-responsive {
+  width: 100%; /* Ocupa el panel central disponible. */
+  aspect-ratio: 16 / 9; /* Conserva la proporción del video. */
+}
+
+/* Botón para ir a la ficha de la película en IMDb. */
+.ver-ahora {
+  margin-top: 18px; /* Separa el enlace de la valoración de la comunidad. */
+  text-align: center; /* Centra el enlace dentro de la tarjeta de portada. */
+}
+.ver-ahora a {
+  display: inline-block; /* Permite aplicar padding al enlace. */
+  padding: 11px 18px; /* Forma visual de botón. */
+  border: 2px solid #000; /* Marco negro coherente con la estética CineBit. */
+  border-radius: 8px; /* Esquinas redondeadas. */
+  background: var(--rojo); /* Fondo rojo de tu paleta. */
+  color: var(--crema); /* Letra clara. */
+  font-weight: bold; /* Destaca el botón de consulta. */
+  text-decoration: none; /* Quita el subrayado habitual del enlace. */
+}
+.ver-ahora a:hover,
+.ver-ahora a:focus-visible {
+  background: var(--dorado); /* Al apuntarlo, el botón pasa a dorado. */
+  color: #000; /* Mejor contraste sobre el fondo dorado. */
+}
+
+/* Las reseñas largas se pueden leer sin alargar indefinidamente la página. */
+.detalle-pelicula .resenas #listaResenas {
+  max-height: 440px; /* Límite para el listado de reseñas. */
+  overflow-y: auto; /* Si hay muchas, el listado se desplaza verticalmente. */
+  overflow-wrap: anywhere; /* Evita que textos largos ensanchen la caja. */
+}
+
+/* Tablet: portada y tráiler arriba, reseñas abajo sin comprimir el video. */
+@media (max-width: 1300px) {
+  .detalle-pelicula {
+    grid-template-columns: minmax(220px, 310px) minmax(0, 640px);
+    /* El video llega hasta 640 px; se reduce solo cuando falta espacio. */
+  }
+  .detalle-pelicula > .resenas {
+    grid-column: 1 / -1; /* Reseñas ocupan el ancho de la fila inferior. */
+  }
+}
+
+/* Celulares: se apilan portada, tráiler y reseñas para leer cómodamente. */
+@media (max-width: 800px) {
+  .detalle-pelicula {
+    grid-template-columns: minmax(0, 1fr); /* Una sola columna. */
+    gap: 18px; /* Espacio entre tarjetas apiladas. */
+  }
+  .detalle-pelicula > .ficha {
+    max-width: 420px; /* Evita que el afiche ocupe toda una pantalla grande. */
+    margin: 0 auto; /* Centra la portada. */
+  }
+  .detalle-pelicula > .resenas {
+    grid-column: auto; /* Reseñas vuelven a su lugar en una columna. */
+  }
+}

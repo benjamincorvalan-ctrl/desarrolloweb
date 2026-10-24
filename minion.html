@@ -7,20 +7,68 @@
   <link href="https://fonts.googleapis.com/css2?family=Graduate&display=swap" rel="stylesheet"> <!-- tipografía de títulos -->
   <link rel="stylesheet" href="estilo.css">                   <!-- estilos compartidos -->
 </head>
-<body data-pelicula="minion">
+<body data-pelicula="minion" class="pagina-interna">
+  <!-- Flecha superior: siempre visible y devuelve al menú principal, sin borrar los enlaces inferiores. -->
+  <a class="volver-inicio-superior" href="index.html" aria-label="Volver al menú principal">
+    <span aria-hidden="true">←</span> Inicio
+  </a>
+
   <header class="cabecera"><h1>Minions: Nace un villano (2022)</h1></header>               <!-- título de la película -->
-  <section class="ficha">                                     <!-- tarjeta con afiche y estrellas -->
-    <img src="https://m.media-amazon.com/images/I/81ffeOxg3gL._AC_UF1000,1000_QL80_.jpg" alt="Minions"> <!-- afiche -->
-    <p>Califica esta película:</p>
-    <form class="star-rating">                                <!-- las estrellas se ordenan con CSS -->
-      <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
-      <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
-      <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
-      <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
-      <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
-    </form>
-  </section>
-  <section class="resenas">                                   <!-- tarjeta de reseñas -->
+  <!-- La caja detalle-pelicula une la portada (izquierda) y el tráiler (derecha). -->
+  <div class="detalle-pelicula">
+      <!-- Columna izquierda: mantiene el afiche y las estrellas que ya tenías. -->
+      <section class="ficha">                                     <!-- tarjeta con afiche y estrellas -->
+      <img src="https://m.media-amazon.com/images/I/81ffeOxg3gL._AC_UF1000,1000_QL80_.jpg" alt="Minions"> <!-- afiche -->
+      <p>Califica esta película:</p>
+      <form class="star-rating">                                <!-- las estrellas se ordenan con CSS -->
+        <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+        <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+        <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+        <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+        <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+      </form>
+    
+      <!-- Botón de IMDb debajo de la valoración de esta película. -->
+      <div class="ver-ahora">
+        <a href="https://www.imdb.com/title/tt5113044/"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Consultar la ficha de esta película en IMDb">
+          Ver ahora ↗
+        </a>
+      </div>
+</section>
+
+    <!-- Columna derecha: reproductor de YouTube y descripción de la película. -->
+    <section class="panel-trailer" aria-label="Tráiler y sinopsis de Minions: Nace un villano">
+      <h2>Tráiler</h2> <!-- Título que aparecerá sobre el video. -->
+
+      <!-- Este contenedor permite que el video conserve su proporción 16:9. -->
+      <div class="video-responsive">
+        <!-- /embed/ es la dirección de YouTube para insertar videos en otra web. -->
+        <iframe
+          src="https://www.youtube.com/embed/98Gym6CazPs"
+          title="Tráiler de Minions: Nace un villano"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <!-- Enlace de respaldo: si YouTube bloquea el reproductor, se puede abrir el video directamente. -->
+      <p class="enlace-youtube">¿No se reproduce? <a href="https://www.youtube.com/watch?v=98Gym6CazPs" target="_blank" rel="noopener noreferrer">Ver el tráiler en YouTube</a></p>
+
+      <!-- Resumen breve, debajo del tráiler, tal como lo pediste. -->
+      <div class="sinopsis">
+        <h3>Sinopsis</h3> <!-- Subtítulo de la sinopsis. -->
+        <p>En los años setenta, un joven Gru sueña con convertirse en un gran supervillano. Cuando intenta unirse al grupo de los Vicio 6, sus planes salen mal y termina viviendo una aventura junto a los Minions, quienes lo ayudan a enfrentar nuevos peligros.</p> <!-- Texto descriptivo de esta película. -->
+      </div>
+    </section>
+  
+
+    <!-- Tercera columna: reseñas que ya utiliza resenas.js. -->
+    <section class="resenas">                                   <!-- tarjeta de reseñas -->
     <h2>Reseñas</h2>
     <form id="formResena" hidden>                             <!-- solo se muestra con sesión iniciada (lo decide resenas.js) -->
       <textarea name="texto" rows="4" maxlength="500" placeholder="Escribe tu reseña..." required></textarea> <!-- máx. 500 letras -->
@@ -29,6 +77,8 @@
     <p id="avisoResena">Inicia sesión para escribir una reseña. <a href="index.html">Ir a iniciar sesión</a></p> <!-- se muestra sin sesión -->
     <div id="listaResenas"></div>                             <!-- aquí aparecen las reseñas -->
   </section>
+  </div> <!-- Fin de las tres columnas: portada, tráiler y reseñas. -->
+
   <a class="volver" href="index.html">Volver a la página principal</a>
   <script src="resenas.js"></script>                         <!-- lógica de reseñas -->
 </body>

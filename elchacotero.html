@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">                                      <!-- tildes y ñ -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- se adapta al celular -->
+  <title>El chacotero sentimental</title>                                           <!-- texto de la pestaña -->
+  <link href="https://fonts.googleapis.com/css2?family=Graduate&display=swap" rel="stylesheet"> <!-- tipografía de títulos -->
+  <link rel="stylesheet" href="estilo.css">                   <!-- estilos compartidos -->
+</head>
+<body data-pelicula="elchacotero" class="pagina-interna">
+  <!-- Flecha superior: siempre visible y devuelve al menú principal, sin borrar los enlaces inferiores. -->
+  <a class="volver-inicio-superior" href="index.html" aria-label="Volver al menú principal">
+    <span aria-hidden="true">←</span> Inicio
+  </a>
+
+  <header class="cabecera"><h1>El chacotero sentimental (1999)</h1></header>               <!-- título de la película -->
+  <!-- La caja detalle-pelicula une la portada (izquierda) y el tráiler (derecha). -->
+  <div class="detalle-pelicula">
+      <!-- Columna izquierda: mantiene el afiche y las estrellas que ya tenías. -->
+      <section class="ficha">                                     <!-- tarjeta con afiche y estrellas -->
+      <img src="https://cdn.cclm.cl/web/wp-content/uploads/2022/05/el-chacotero-afiche.jpg" alt="El chacotero sentimental"> <!-- afiche -->
+      <p>Califica esta película:</p>
+      <form class="star-rating">                                <!-- las estrellas se ordenan con CSS -->
+        <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+        <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+        <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+        <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+        <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+      </form>
+    
+      <!-- Botón de IMDb debajo de la valoración de esta película. -->
+      <div class="ver-ahora">
+        <a href="https://www.imdb.com/title/tt0221063/"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Consultar la ficha de esta película en IMDb">
+          Ver ahora ↗
+        </a>
+      </div>
+</section>
+
+    <!-- Columna derecha: reproductor de YouTube y descripción de la película. -->
+    <section class="panel-trailer" aria-label="Tráiler y sinopsis de El chacotero sentimental">
+      <h2>Tráiler</h2> <!-- Título que aparecerá sobre el video. -->
+
+      <!-- Este contenedor permite que el video conserve su proporción 16:9. -->
+      <div class="video-responsive">
+        <!-- /embed/ es la dirección de YouTube para insertar videos en otra web. -->
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/W9SGP3G6jHg?si=YHXGjjhp0HE4nPld" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+
+      <!-- Enlace de respaldo: si YouTube bloquea el reproductor, se puede abrir el video directamente. -->
+      <p class="enlace-youtube">¿No se reproduce? <a href="https://www.youtube.com/watch?v=W9SGP3G6jHg&rco=1" target="_blank" rel="noopener noreferrer">Ver el tráiler en YouTube</a></p>
+
+      <!-- Resumen breve, debajo del tráiler, tal como lo pediste. -->
+      <div class="sinopsis">
+        <h3>Sinopsis</h3> <!-- Subtítulo de la sinopsis. -->
+        <p>Un locutor de radio recibe, a través de llamadas de sus oyentes, tres historias sobre relaciones sentimentales y dramas.</p> <!-- Texto descriptivo de esta película. -->
+      </div>
+    </section>
+  
+
+    <!-- Tercera columna: reseñas que ya utiliza resenas.js. -->
+    <section class="resenas">                                   <!-- tarjeta de reseñas -->
+    <h2>Reseñas</h2>
+    <form id="formResena" hidden>                             <!-- solo se muestra con sesión iniciada (lo decide resenas.js) -->
+      <textarea name="texto" rows="4" maxlength="500" placeholder="Escribe tu reseña..." required></textarea> <!-- máx. 500 letras -->
+      <button type="submit">Publicar reseña</button>
+    </form>
+    <p id="avisoResena">Inicia sesión para escribir una reseña. <a href="index.html">Ir a iniciar sesión</a></p> <!-- se muestra sin sesión -->
+    <div id="listaResenas"></div>                             <!-- aquí aparecen las reseñas -->
+  </section>
+  </div> <!-- Fin de las tres columnas: portada, tráiler y reseñas. -->
+
+  <a class="volver" href="index.html">Volver a la página principal</a>
+  <script src="resenas.js"></script>                         <!-- lógica de reseñas -->
+</body>
+</html>

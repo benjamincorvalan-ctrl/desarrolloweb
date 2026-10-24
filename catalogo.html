@@ -16,7 +16,7 @@
             color: #ffffff;
             font-family: Arial, sans-serif;
             text-align: center;
-            padding: 20px;
+            padding: 20px 60px;
             }
             header{
                 margin-bottom: 20px;
@@ -74,7 +74,7 @@
     </style>
 </head>
 <body>
-    <header class="cabecera">
+    <header class="cabecera con-flecha"><a class="flecha-volver" href="index.html" title="Volver al inicio" aria-label="Volver a la página principal">←</a> <!-- flecha ← dentro del panel rojo -->
         <h1><img class="logo" src= "logo.png" alt = "Logo CineBit"> Películas épicas 777</h1>
         <p> Cátalogo de películas</p>
     </header>
@@ -85,9 +85,16 @@
     <select id = "selectGenero">
         <option value = "todos">Todos</option>
         <option value = "accion">Accion</option>
-        <opcion value = "fantasia">Fantasia</opcion>
+        <option value = "fantasia">Fantasia</option>
         <option value = "suspenso">Suspenso</option>
         <option value = "comedia">Comedia</option>
+            <option value="terror">Terror</option> <!-- Filtro de terror. -->
+        <option value="aventura">Aventura</option> <!-- Filtro de aventura. -->
+        <option value="animacion">Animación</option> <!-- Filtro de animación. -->
+        <option value="cienciaficcion">Ciencia ficción</option> <!-- Filtro de ciencia ficción. -->
+        <option value="drama">Drama</option> <!-- Filtro de drama. -->
+        <option value="musical">Musical</option> <!-- Filtro de musical. -->
+        <option value="romance">Romance</option> <!-- Filtro de romance. -->
     </select>
     </nav>
     
@@ -103,6 +110,75 @@
             <a class = "tarjeta" href = "salchicha.html" data-titulo="la fiesta de las salchichas" data-genero="comedia">
             <span>La fiesta de las salchichas</span>
             </a> 
+
+            <!-- El chacotero sentimental (1999). Esta tarjeta también usa tus filtros. -->
+            <a class="tarjeta" href="elchacotero.html" data-titulo="el chacotero sentimental" data-genero="comedia drama">
+                <span>El chacotero sentimental (1999)</span> <!-- Nombre y año. -->
+            </a>
+            <!-- Obsesión (2025). Esta tarjeta también usa tus filtros. -->
+            <a class="tarjeta" href="obsesion.html" data-titulo="obsesión" data-genero="terror suspenso romance">
+                <span>Obsesión (2025)</span> <!-- Nombre y año. -->
+            </a>
+            <!-- Spider-Man: A través del Spider-Verso (2023). Esta tarjeta también usa tus filtros. -->
+            <a class="tarjeta" href="spiderman-spider-verso.html" data-titulo="spider-man: a través del spider-verso" data-genero="accion animacion aventura">
+                <span>Spider-Man: A través del Spider-Verso (2023)</span> <!-- Nombre y año. -->
+            </a>
+            <!-- The Truman Show (1998). Esta tarjeta también usa tus filtros. -->
+            <a class="tarjeta" href="the-truman-show.html" data-titulo="the truman show" data-genero="drama comedia cienciaficcion">
+                <span>The Truman Show (1998)</span> <!-- Nombre y año. -->
+            </a>
+            <!-- Resident Evil (2026). Esta tarjeta también usa tus filtros. -->
+            <a class="tarjeta" href="resident-evil.html" data-titulo="resident evil" data-genero="terror accion suspenso">
+                <span>Resident Evil (2026)</span> <!-- Nombre y año. -->
+            </a>
+            <!-- La La Land (2016). Esta tarjeta también usa tus filtros. -->
+            <a class="tarjeta" href="lalaland.html" data-titulo="la la land" data-genero="romance drama musical">
+                <span>La La Land (2016)</span> <!-- Nombre y año. -->
+            </a>
+            <!-- Jurassic Park (1993). Esta tarjeta también usa tus filtros. -->
+            <a class="tarjeta" href="jurassic-park.html" data-titulo="jurassic park" data-genero="aventura accion cienciaficcion">
+                <span>Jurassic Park (1993)</span> <!-- Nombre y año. -->
+            </a>
+            <!-- Viernes 13 (1980). Esta tarjeta también usa tus filtros. -->
+            <a class="tarjeta" href="viernes13.html" data-titulo="viernes 13" data-genero="terror suspenso">
+                <span>Viernes 13 (1980)</span> <!-- Nombre y año. -->
+            </a>
+            <!-- It (2017). Esta tarjeta también usa tus filtros. -->
+            <a class="tarjeta" href="it.html" data-titulo="it" data-genero="terror suspenso">
+                <span>It (2017)</span> <!-- Nombre y año. -->
+            </a>
+            <!-- Alicia en el país de las maravillas (2010). Esta tarjeta también usa tus filtros. -->
+            <a class="tarjeta" href="alicia-2010.html" data-titulo="alicia en el país de las maravillas" data-genero="fantasia aventura">
+                <span>Alicia en el país de las maravillas (2010)</span> <!-- Nombre y año. -->
+            </a>
+            <!-- Alicia en el país de las maravillas (1951). Esta tarjeta también usa tus filtros. -->
+            <a class="tarjeta" href="alicia-1951.html" data-titulo="alicia en el país de las maravillas" data-genero="fantasia animacion aventura">
+                <span>Alicia en el país de las maravillas (1951)</span> <!-- Nombre y año. -->
+            </a>
+            <!-- Son como niños (2010). Esta tarjeta también usa tus filtros. -->
+            <a class="tarjeta" href="son-como-ninos.html" data-titulo="son como niños" data-genero="comedia">
+                <span>Son como niños (2010)</span> <!-- Nombre y año. -->
+            </a>
+            <!-- Orgullo y prejuicio (2005). Esta tarjeta también usa tus filtros. -->
+            <a class="tarjeta" href="orgullo-prejuicio.html" data-titulo="orgullo y prejuicio" data-genero="romance drama">
+                <span>Orgullo y prejuicio (2005)</span> <!-- Nombre y año. -->
+            </a>
+            <!-- Coraline y la puerta secreta (2009). Esta tarjeta también usa tus filtros. -->
+            <a class="tarjeta" href="coraline.html" data-titulo="coraline y la puerta secreta" data-genero="animacion fantasia terror">
+                <span>Coraline y la puerta secreta (2009)</span> <!-- Nombre y año. -->
+            </a>
+            <!-- Iron Man (2008). Esta tarjeta también usa tus filtros. -->
+            <a class="tarjeta" href="ironman.html" data-titulo="iron man" data-genero="accion aventura cienciaficcion">
+                <span>Iron Man (2008)</span> <!-- Nombre y año. -->
+            </a>
+            <!-- Furiosa: de la saga Mad Max (2024). Esta tarjeta también usa tus filtros. -->
+            <a class="tarjeta" href="furiosa.html" data-titulo="furiosa: de la saga mad max" data-genero="accion aventura cienciaficcion">
+                <span>Furiosa: de la saga Mad Max (2024)</span> <!-- Nombre y año. -->
+            </a>
+            <!-- Los juegos del hambre (2012). Esta tarjeta también usa tus filtros. -->
+            <a class="tarjeta" href="juegos-del-hambre.html" data-titulo="los juegos del hambre" data-genero="accion aventura cienciaficcion">
+                <span>Los juegos del hambre (2012)</span> <!-- Nombre y año. -->
+            </a>
         </div>
         <p id = "mensajeVacio" class = "mensaje-vacio" hidden> No hay coincidencias</p>
     </main>

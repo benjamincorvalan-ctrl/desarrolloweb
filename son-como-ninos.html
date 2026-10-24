@@ -1,0 +1,78 @@
+<!DOCTYPE html> <!-- Indica que es una página HTML5. -->
+<html lang="es"> <!-- El contenido está escrito en español. -->
+<head>
+  <meta charset="UTF-8"> <!-- Permite mostrar tildes y ñ. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Se adapta al celular. -->
+  <title>Son como niños (2010)</title> <!-- Texto que aparece en la pestaña del navegador. -->
+  <link href="https://fonts.googleapis.com/css2?family=Graduate&amp;display=swap" rel="stylesheet"> <!-- Fuente de los títulos. -->
+  <link rel="stylesheet" href="estilo.css"> <!-- Usa TU mismo archivo CSS. -->
+</head>
+<body data-pelicula="soncomoninos" class="pagina-interna">
+  <!-- Flecha superior: siempre visible y devuelve al menú principal, sin borrar los enlaces inferiores. -->
+  <a class="volver-inicio-superior" href="index.html" aria-label="Volver al menú principal">
+    <span aria-hidden="true">←</span> Inicio
+  </a>
+ <!-- Identificador de la película que usa resenas.js. -->
+  <header class="cabecera"><h1>Son como niños (2010)</h1></header> <!-- Título y año de la película. -->
+
+  <!-- Misma estructura que elchacotero.html: afiche a la izquierda y tráiler a la derecha. -->
+  <div class="detalle-pelicula">
+    <section class="ficha"> <!-- Portada y estrellas de la película. -->
+      <img src="https://m.media-amazon.com/images/M/MV5BMjA0ODYwNzU5Nl5BMl5BanBnXkFtZTcwNTI1MTgxMw%40%40._V1_.jpg" alt="Portada de Son como niños"> <!-- Imagen del afiche. -->
+      <p>Califica esta película:</p> <!-- Texto que aparece sobre las estrellas. -->
+      <form class="star-rating"> <!-- Conserva las cinco estrellas de tu diseño. -->
+        <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label> <!-- Estrella de 5 punto(s). -->
+        <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label> <!-- Estrella de 4 punto(s). -->
+        <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label> <!-- Estrella de 3 punto(s). -->
+        <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label> <!-- Estrella de 2 punto(s). -->
+        <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label> <!-- Estrella de 1 punto(s). -->
+      </form>
+    
+      <!-- Botón de IMDb debajo de la valoración de esta película. -->
+      <div class="ver-ahora">
+        <a href="https://www.imdb.com/title/tt1375670/"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Consultar la ficha de esta película en IMDb">
+          Ver ahora ↗
+        </a>
+      </div>
+</section>
+
+    <section class="panel-trailer" aria-label="Tráiler y sinopsis de Son como niños"> <!-- Zona derecha. -->
+      <h2>Tráiler</h2> <!-- Título sobre el video. -->
+      <!-- Video de YouTube en formato /embed/, igual que tu ficha de El chacotero. -->
+      <div class="video-responsive">
+        <iframe width="560" height="315"
+                src="https://www.youtube.com/embed/e01NVCveGkg"
+                title="Tráiler de Son como niños"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+      </div>
+      <!-- Si YouTube bloquea la inserción, se puede abrir el mismo tráiler allí. -->
+      <p class="enlace-youtube">¿No se reproduce? <a href="https://www.youtube.com/watch?v=e01NVCveGkg" target="_blank" rel="noopener noreferrer">Ver en YouTube</a></p>
+      <div class="sinopsis"> <!-- Descripción debajo del tráiler. -->
+        <h3>Sinopsis</h3>
+        <p>Cinco amigos de la infancia se reúnen con sus familias tras la muerte de su antiguo entrenador y descubren que crecer no siempre significa madurar.</p>
+      </div>
+    </section>
+  
+
+    <!-- Tercera columna: reseñas que ya utiliza resenas.js. -->
+    <section class="resenas"> <!-- Formulario de reseñas que ya utilizas. -->
+    <h2>Reseñas</h2>
+    <form id="formResena" hidden> <!-- resenas.js lo muestra solo con sesión iniciada. -->
+      <textarea name="texto" rows="4" maxlength="500" placeholder="Escribe tu reseña..." required></textarea> <!-- Texto del usuario. -->
+      <button type="submit">Publicar reseña</button> <!-- Envía la reseña. -->
+    </form>
+    <p id="avisoResena">Inicia sesión para escribir una reseña. <a href="index.html">Ir a iniciar sesión</a></p> <!-- Aviso sin sesión. -->
+    <div id="listaResenas"></div> <!-- Aquí se mostrarán las reseñas. -->
+  </section>
+  </div> <!-- Fin de las tres columnas: portada, tráiler y reseñas. -->
+
+  <a class="volver" href="index.html">Volver a la página principal</a> <!-- Botón de regreso. -->
+  <script src="resenas.js"></script> <!-- Usa TU mismo JavaScript de reseñas. -->
+</body>
+</html>
