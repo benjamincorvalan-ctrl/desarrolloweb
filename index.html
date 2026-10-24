@@ -1,0 +1,175 @@
+<!DOCTYPE html>                                              <!-- avisa que es un documento HTML5 -->
+<html lang="es">                                              <!-- página en español -->
+<head>                                                        <!-- datos invisibles de la página -->
+  <meta charset="UTF-8">                                      <!-- para que se vean tildes y ñ -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- se adapta al celular -->
+  <title>Películas épicas 777</title>                         <!-- texto de la pestaña -->
+  <link href="https://fonts.googleapis.com/css2?family=Graduate&display=swap" rel="stylesheet"> <!-- carga la tipografía de títulos -->
+  <link rel="stylesheet" href="estilo.css">                  <!-- conecta el archivo CSS -->
+
+  <style>
+    .tarjeta.oculto{
+      display: none !important;
+    }
+  </style>
+</head>
+<body>                                                        <!-- todo lo visible -->
+  <header class="cabecera con-sesion">                                   <!-- bloque del título (clase = nombre para el CSS) -->
+    <details class="sesion-caja" id="sesionCaja">             <!-- <details> = caja que se abre y cierra al hacer clic, sin JavaScript -->
+        <summary id="resumenSesion">Iniciar sesión ▾</summary>  <!-- lo único que se ve siempre: botón pequeño (JS pone tu nombre al entrar) -->
+        <div class="sesion-panel">                              <!-- panel que se despliega al abrir -->
+          <h3 id="titulo-login">Inicia sesión</h3>              <!-- cambia a "Hola, nombre" al entrar -->
+          <form id="formLogin">                                 <!-- formulario; JS captura el envío -->
+            <input id="usuario" placeholder="Nombre de usuario" required> <!-- required = no se puede dejar vacío -->
+            <input id="clave" type="password" placeholder="Contraseña" required> <!-- type=password oculta los puntos -->
+            <button type="submit">Entrar</button>               <!-- envía el formulario = iniciar sesión -->
+            <button type="button" id="registrar">Crear cuenta</button> <!-- type=button no envía; lo maneja JS -->
+          </form>
+          <p id="mensaje"></p>                                  <!-- aquí JS escribe errores o éxito -->
+          <p><a href="guest.html">Entrar como invitado</a></p>   <!-- acceso sin cuenta -->
+        </div>
+        <section>
+        <button type="button" id="cuenta" hidden> Ver Perfil</button>
+        <button type="button" id="salir" hidden>Cerrar sesión</button> <!-- oculto hasta iniciar sesión -->
+        </section>
+      </details>   <!-- cajita de sesión: esquina superior derecha del panel -->
+    <h1><img class="logo" src="logo.png" alt="Logo CineBit">Películas épicas 777</h1> <!-- título principal con logo -->
+    <p>Donde la magia del cine es mágica</p>                  <!-- eslogan -->
+  </header>
+
+  <nav class="barra">                                         <!-- barra de búsqueda y géneros -->
+    <input type="search" id = "inputBusqueda" placeholder="Buscar película...">    <!-- campo de búsqueda -->
+    <select id = "selectGenero">                                                  <!-- lista desplegable de géneros -->
+      <option value = "todos">Todos los géneros</option>                      <!-- opción por defecto -->
+      <option value = "accion">Acción</option>                                 <!-- género -->
+      <option value = "fantasia">Fantasía</option>                               <!-- género -->
+      <option value = "suspenso">Suspenso</option>                               <!-- género -->
+      <option value = "terror">Terror</option>                                 <!-- género -->
+      <option value = "comedia"> Comedia</option>
+          <option value="aventura">Aventura</option> <!-- Filtro de aventura. -->
+      <option value="animacion">Animación</option> <!-- Filtro de animación. -->
+      <option value="cienciaficcion">Ciencia ficción</option> <!-- Filtro de ciencia ficción. -->
+      <option value="drama">Drama</option> <!-- Filtro de drama. -->
+      <option value="musical">Musical</option> <!-- Filtro de musical. -->
+      <option value="romance">Romance</option> <!-- Filtro de romance. -->
+    </select>
+    <a href="catalogo.html">Catálogo de películas</a>         <!-- enlace al catálogo -->
+  </nav>
+
+  <main>                                                      <!-- contenido principal -->
+    <h2>Películas con mejores reseñas de la semana</h2>                 <!-- subtítulo -->
+    <div class="carrusel-caja">                               <!-- contiene flechas y carrusel -->
+      <button class="flecha" id="izq">‹</button>              <!-- flecha izquierda (id para usarla en JS) -->
+      <div class="carrusel" id="carrusel">                    <!-- lista horizontal -->
+        <a class="tarjeta" href="shrek.html" data-titulo = "shrek" data-genero = "fantasia comedia">                 <!-- tarjeta: toda es un enlace a la ficha -->
+          <img src="https://m.media-amazon.com/images/M/MV5BN2FkMTRkNTUtYTI0NC00ZjI4LWI5MzUtMDFmOGY0NmU2OGY1XkEyXkFqcGc@._V1_.jpg" alt="Shrek"> <!-- afiche -->
+          <span>Shrek (2001)</span>                           <!-- título bajo el afiche -->
+        </a>
+        <a class="tarjeta" href="minion.html" data-titulo = "minions nace un villano" data-genero = "comedia accion">                <!-- segunda tarjeta -->
+          <img src="https://m.media-amazon.com/images/I/81ffeOxg3gL._AC_UF1000,1000_QL80_.jpg" alt="Minions"> <!-- afiche -->
+          <span>Minions: Nace un villano (2022)</span>        <!-- título -->
+        </a>
+        <a class="tarjeta" href="salchicha.html" data-titulo = "la fiesta de las salchichas" data-genero = "comedia">             <!-- tercera tarjeta -->
+          <img src="https://upload.wikimedia.org/wikipedia/en/f/f7/Sausage_Party_logo.png" alt="La fiesta de las salchichas"> <!-- afiche -->
+          <span>La fiesta de las salchichas (2016)</span>     <!-- título -->
+        </a>                                                  <!-- para más películas, copia una tarjeta completa -->
+
+        <!-- El chacotero sentimental (1999). Al hacer clic abre su HTML propio. -->
+        <a class="tarjeta" href="elchacotero.html" data-titulo="el chacotero sentimental" data-genero="comedia drama">
+          <img src="https://cdn.cclm.cl/web/wp-content/uploads/2022/05/el-chacotero-afiche.jpg" alt="Portada de El chacotero sentimental"> <!-- Foto del afiche. -->
+          <span>El chacotero sentimental (1999)</span> <!-- Nombre y año. -->
+        </a>
+        <!-- Obsesión (2025). Al hacer clic abre su HTML propio. -->
+        <a class="tarjeta" href="obsesion.html" data-titulo="obsesión" data-genero="terror suspenso romance">
+          <img src="https://www.impawards.com/2026/posters/obsession_ver6_xlg.jpg" alt="Portada de Obsesión"> <!-- Foto del afiche. -->
+          <span>Obsesión (2025)</span> <!-- Nombre y año. -->
+        </a>
+        <!-- Spider-Man: A través del Spider-Verso (2023). Al hacer clic abre su HTML propio. -->
+        <a class="tarjeta" href="spiderman-spider-verso.html" data-titulo="spider-man: a través del spider-verso" data-genero="accion animacion aventura">
+          <img src="https://pixieposters.co.uk/cdn/shop/files/spiderman_14_-gigapixel-standard-height-2480px.jpg?v=1714059878" alt="Portada de Spider-Man: A través del Spider-Verso"> <!-- Foto del afiche. -->
+          <span>Spider-Man: A través del Spider-Verso (2023)</span> <!-- Nombre y año. -->
+        </a>
+        <!-- The Truman Show (1998). Al hacer clic abre su HTML propio. -->
+        <a class="tarjeta" href="the-truman-show.html" data-titulo="the truman show" data-genero="drama comedia cienciaficcion">
+          <img src="https://pastposters.com/cdn/shop/files/truman-show-cinema-one-sheet-movie-poster-_1_1932d0e1-8a56-48ad-909a-93e888ce279f.jpg?v=1746699208" alt="Portada de The Truman Show"> <!-- Foto del afiche. -->
+          <span>The Truman Show (1998)</span> <!-- Nombre y año. -->
+        </a>
+        <!-- Resident Evil (2026). Al hacer clic abre su HTML propio. -->
+        <a class="tarjeta" href="resident-evil.html" data-titulo="resident evil" data-genero="terror accion suspenso">
+          <img src="https://resizing.flixster.com/8UjdqEXuMDD1Pvo-66b2KeHxL1g%3D/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzczNjk4OThmLTZjNmUtNGRkMC1hNDM0LTA3N2IyNTJlNGNiNy5qcGc%3D" alt="Portada de Resident Evil"> <!-- Foto del afiche. -->
+          <span>Resident Evil (2026)</span> <!-- Nombre y año. -->
+        </a>
+        <!-- La La Land (2016). Al hacer clic abre su HTML propio. -->
+        <a class="tarjeta" href="lalaland.html" data-titulo="la la land" data-genero="romance drama musical">
+          <img src="https://cdn.posteritati.com/posters/000/000/068/608/la-la-land-md-web.jpg" alt="Portada de La La Land"> <!-- Foto del afiche. -->
+          <span>La La Land (2016)</span> <!-- Nombre y año. -->
+        </a>
+        <!-- Jurassic Park (1993). Al hacer clic abre su HTML propio. -->
+        <a class="tarjeta" href="jurassic-park.html" data-titulo="jurassic park" data-genero="aventura accion cienciaficcion">
+          <img src="https://www.posterpalace.com/cdn/shop/products/jurassic-park-us-one-sheet-1993-original-release-posterpalacecom-228589.jpg?v=1671388294&amp;width=1946" alt="Portada de Jurassic Park"> <!-- Foto del afiche. -->
+          <span>Jurassic Park (1993)</span> <!-- Nombre y año. -->
+        </a>
+        <!-- Viernes 13 (1980). Al hacer clic abre su HTML propio. -->
+        <a class="tarjeta" href="viernes13.html" data-titulo="viernes 13" data-genero="terror suspenso">
+          <img src="https://cdn.posteritati.com/posters/000/000/059/931/friday-the-13th-md-web.jpg" alt="Portada de Viernes 13"> <!-- Foto del afiche. -->
+          <span>Viernes 13 (1980)</span> <!-- Nombre y año. -->
+        </a>
+        <!-- It (2017). Al hacer clic abre su HTML propio. -->
+        <a class="tarjeta" href="it.html" data-titulo="it" data-genero="terror suspenso">
+          <img src="https://cdn.posteritati.com/posters/000/000/053/969/it-md-web.jpg" alt="Portada de It"> <!-- Foto del afiche. -->
+          <span>It (2017)</span> <!-- Nombre y año. -->
+        </a>
+        <!-- Alicia en el país de las maravillas (2010). Al hacer clic abre su HTML propio. -->
+        <a class="tarjeta" href="alicia-2010.html" data-titulo="alicia en el país de las maravillas" data-genero="fantasia aventura">
+          <img src="https://cdn.t3pedia.org/media/uploads/2025/10/07/3e81veEau7udzxBr173z396EdSJAwdIl.jpg" alt="Portada de Alicia en el país de las maravillas"> <!-- Foto del afiche. -->
+          <span>Alicia en el país de las maravillas (2010)</span> <!-- Nombre y año. -->
+        </a>
+        <!-- Alicia en el país de las maravillas (1951). Al hacer clic abre su HTML propio. -->
+        <a class="tarjeta" href="alicia-1951.html" data-titulo="alicia en el país de las maravillas" data-genero="fantasia animacion aventura">
+          <img src="https://www.orsonandwelles.co.uk/cdn/shop/files/Alice-in-Wonderland-1951-US-1-Sheet-Film-Poster_zz_1200x.jpg?v=1759495954" alt="Portada de Alicia en el país de las maravillas"> <!-- Foto del afiche. -->
+          <span>Alicia en el país de las maravillas (1951)</span> <!-- Nombre y año. -->
+        </a>
+        <!-- Son como niños (2010). Al hacer clic abre su HTML propio. -->
+        <a class="tarjeta" href="son-como-ninos.html" data-titulo="son como niños" data-genero="comedia">
+          <img src="https://m.media-amazon.com/images/M/MV5BMjA0ODYwNzU5Nl5BMl5BanBnXkFtZTcwNTI1MTgxMw%40%40._V1_.jpg" alt="Portada de Son como niños"> <!-- Foto del afiche. -->
+          <span>Son como niños (2010)</span> <!-- Nombre y año. -->
+        </a>
+        <!-- Orgullo y prejuicio (2005). Al hacer clic abre su HTML propio. -->
+        <a class="tarjeta" href="orgullo-prejuicio.html" data-titulo="orgullo y prejuicio" data-genero="romance drama">
+          <img src="https://i.ebayimg.com/00/s/MTYwMFgxMDg3/z/wawAAOSwzbxnYpdE/%24_57.JPG?set_id=880000500F" alt="Portada de Orgullo y prejuicio"> <!-- Foto del afiche. -->
+          <span>Orgullo y prejuicio (2005)</span> <!-- Nombre y año. -->
+        </a>
+        <!-- Coraline y la puerta secreta (2009). Al hacer clic abre su HTML propio. -->
+        <a class="tarjeta" href="coraline.html" data-titulo="coraline y la puerta secreta" data-genero="animacion fantasia terror">
+          <img src="https://cdn.posteritati.com/posters/000/000/053/066/coraline-md-web.jpg" alt="Portada de Coraline y la puerta secreta"> <!-- Foto del afiche. -->
+          <span>Coraline y la puerta secreta (2009)</span> <!-- Nombre y año. -->
+        </a>
+        <!-- Iron Man (2008). Al hacer clic abre su HTML propio. -->
+        <a class="tarjeta" href="ironman.html" data-titulo="iron man" data-genero="accion aventura cienciaficcion">
+          <img src="https://filmartgallery.com/cdn/shop/products/Iron-Man-Vintage-Movie-Poster-Original_5000x.jpg?v=1771946434" alt="Portada de Iron Man"> <!-- Foto del afiche. -->
+          <span>Iron Man (2008)</span> <!-- Nombre y año. -->
+        </a>
+        <!-- Furiosa: de la saga Mad Max (2024). Al hacer clic abre su HTML propio. -->
+        <a class="tarjeta" href="furiosa.html" data-titulo="furiosa: de la saga mad max" data-genero="accion aventura cienciaficcion">
+          <img src="https://www.movieposters.com/cdn/shop/files/furiosa-a-mad-max-saga_v5hupebp_1024x1024.jpg?v=1762976344" alt="Portada de Furiosa: de la saga Mad Max"> <!-- Foto del afiche. -->
+          <span>Furiosa: de la saga Mad Max (2024)</span> <!-- Nombre y año. -->
+        </a>
+        <!-- Los juegos del hambre (2012). Al hacer clic abre su HTML propio. -->
+        <a class="tarjeta" href="juegos-del-hambre.html" data-titulo="los juegos del hambre" data-genero="accion aventura cienciaficcion">
+          <img src="https://m.media-amazon.com/images/M/MV5BMWI1OGM4YjQtNmIxNi00YmE2LWJkNTAtY2Q0YjU4NTI5NWQyXkEyXkFqcGc%40._V1_.jpg" alt="Portada de Los juegos del hambre"> <!-- Foto del afiche. -->
+          <span>Los juegos del hambre (2012)</span> <!-- Nombre y año. -->
+        </a>
+      </div>
+      <button class="flecha" id="der">›</button>              <!-- flecha derecha -->
+    </div>
+
+  </main>
+
+  <footer>                                                    <!-- pie de página -->
+    <a href="about.html">Más información sobre la página</a>  <!-- enlace a "Quiénes somos" -->
+    <p>Películas épicas 2026</p>                              <!-- derechos -->
+  </footer>
+
+  <script src="todo.js"></script>
+</body>
+</html>
