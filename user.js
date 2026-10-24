@@ -5,7 +5,7 @@ document.getElementById("nombre").textContent = pan ? pan : "Texto";
 
 const sesion = localStorage.getItem("sesion");
 const todas = JSON.parse(localStorage.getItem("resenas") || "{}");
-const caja = document.getElementById("misResenas");
+const caja = document.getElementById("reviews");
 
 caja.textContent = "";
 

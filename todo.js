@@ -33,9 +33,10 @@ const carrusel = document.getElementById("carrusel");     // guarda el carrusel 
     function mostrarSesion() {                                // muestra u oculta cosas según haya sesión
       const actual = localStorage.getItem("sesion");          // ¿quién está conectado?
       form.hidden = !!actual;                                 // oculta el formulario si hay sesión
-      document.getElementById("cuenta").hidden = !actual;
       document.getElementById("salir").hidden = !actual;      // muestra "Cerrar sesión" solo si hay sesión
+      document.getElementById("cuenta").hidden = !actual;
       document.getElementById("titulo-login").textContent = actual ? "Hola, " + actual : "Inicia sesión"; // cambia el título
+      document.getElementById("resumenSesion").textContent = (actual ? actual : "Iniciar sesión") + " ▾"; // el botón pequeño muestra tu nombre
     }
 
     document.getElementById("registrar").onclick = () => {    // al pulsar "Crear cuenta"
@@ -54,6 +55,7 @@ const carrusel = document.getElementById("carrusel");     // guarda el carrusel 
         localStorage.setItem("sesion", u);                    // guarda quién inició sesión
         msg.textContent = "";                                 // limpia mensajes
         mostrarSesion();                                      // actualiza la pantalla
+        document.getElementById("sesionCaja").open = false; // cierra la cajita después de entrar
       } else msg.textContent = "Usuario o contraseña incorrectos"; // si no, error
     };
 
