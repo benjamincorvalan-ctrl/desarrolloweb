@@ -34,6 +34,7 @@
       if(form)form.hidden = !!actual;                                 // oculta el formulario si hay sesión
       const btnSalir = document.getElementById("salir");
       if(btnSalir)btnSalir.hidden = !actual;
+      document.getElementById("cuenta").hidden = !actual;
       const tituloLogin = document.getElementById("titulo-login");
       if (tituloLogin) tituloLogin.textContent = actual ? "Hola, " + actual : "Inicia sesión";
       const resumenSesion = document.getElementById("resumenSesion");
