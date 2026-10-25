@@ -463,3 +463,108 @@ body.pagina-interna {
     grid-column: auto; /* Reseñas vuelven a su lugar en una columna. */
   }
 }
+
+
+/* ===== CORRECCIÓN 1: SESIÓN EN LA ESQUINA SUPERIOR DERECHA DEL PANEL DEL TÍTULO ===== */
+.cabecera { position: relative; z-index: 20; } /* el panel rojo es la referencia de la cajita; z-index para que el desplegable quede sobre el resto */
+.cabecera .sesion-caja { position: absolute; top: 8px; right: 10px; margin: 0; } /* pegada a la esquina: no mueve ni el logo ni el título */
+.sesion-caja summary { list-style: none; cursor: pointer; padding: 5px 10px; background: var(--fondo); border: 2px solid var(--dorado); border-radius: 6px; font-size: 0.8rem; font-weight: bold; color: var(--crema); text-align: center; } /* botón pequeño siempre visible */
+.sesion-caja summary::-webkit-details-marker { display: none; } /* quita el triangulito por defecto en Chrome/Safari */
+.sesion-caja summary:hover, .sesion-caja[open] summary { background: var(--dorado); color: #000; } /* dorado al pasar el mouse o estar abierta */
+.sesion-panel { position: absolute; right: 0; top: calc(100% + 8px); width: 230px; max-width: 80vw; padding: 12px; background: var(--rojo-oscuro); border: 3px solid #000; border-radius: 10px; text-align: center; z-index: 30; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6); } /* panel que se despliega sobre la página sin empujar nada */
+.sesion-panel h3 { margin: 0 0 8px; font-family: "Graduate", Impact, serif; font-size: 0.95rem; text-transform: uppercase; color: #fff; } /* título pequeño del panel */
+.sesion-panel input { width: 100%; margin-bottom: 8px; padding: 7px 9px; font-size: 0.85rem; } /* campos compactos */
+.sesion-panel button { padding: 7px 10px; font-size: 0.85rem; margin: 2px; } /* botones compactos */
+.sesion-panel p { color: var(--crema); font-style: normal; font-size: 0.8rem; margin: 8px 0 0; } /* los textos del panel no heredan el estilo del eslogan */
+@media (max-width: 700px) { .cabecera.con-sesion { padding-top: 52px; } } /* solo en celular: deja una franja arriba para que el botón no tape el título */
+
+/* ===== CORRECCIÓN 2: RESEÑAS CON SUS ESTRELLAS (las apagadas en gris) ===== */
+.etiqueta-estrellas { margin: 0 0 4px; text-align: center; } /* "Tu calificación:" */
+.resenas .star-rating { margin-bottom: 8px; } /* espacio bajo las estrellas del formulario */
+.error-resena { min-height: 1.3em; margin: 0 0 8px; text-align: center; color: #ff8a8a; font-weight: bold; } /* aviso si faltan estrellas */
+.resena-cabecera { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; } /* autor a la izquierda, fecha a la derecha */
+.resena-fecha { color: #bbb; font-size: 0.85rem; } /* fecha en gris claro y pequeña */
+.resena-estrellas { display: block; margin-top: 4px; color: var(--dorado); font-size: 1.3rem; letter-spacing: 2px; } /* estrellas doradas bajo el autor */
+.resena-estrellas .apagadas { color: #555; } /* estrellas NO obtenidas, en gris: aquí se distingue 1 de 5 estrellas */
+.promedio { margin-top: 6px; } /* promedio en la ficha */
+.promedio .resena-estrellas { font-size: 1.8rem; text-align: center; } /* estrellas grandes del promedio */
+.promedio-texto { margin: 4px 0 0; font-size: 0.95rem; } /* "4.5 / 5 · 2 reseñas" */
+
+/* ===== CARRUSELES DE RANKING (2.º y 3.º) ===== */
+.carrusel-caja + h2 { margin-top: 45px; } /* separa cada carrusel del título siguiente */
+.tarjeta .nota-media { margin-top: 4px; color: var(--dorado); font-size: 0.85rem; } /* "★ 4.5 · 2 reseñas" bajo el título */
+.mensaje-carrusel { padding: 20px; background: var(--rojo-oscuro); border: 4px solid #000; border-radius: 10px; font-size: 0.95rem; } /* aviso cuando aún no hay datos para el ranking */
+
+
+/* ===== BADGES Y OVERLAY DE EDAD ===== */
+.badge-edad {
+  display: inline-block;
+  padding: 4px 8px;
+  background-color: var(--rojo);
+  color: #fff;
+  font-weight: bold;
+  border-radius: 4px;
+  margin-right: 8px;
+  font-size: 0.85rem;
+  border: 1px solid var(--dorado);
+}
+
+.advertencia-contenido {
+  background-color: #000;
+  border-left: 4px solid var(--rojo);
+  padding: 10px;
+  margin: 12px 0;
+  border-radius: 4px;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.reseñas-bloqueadas {
+  filter: blur(8px);
+  user-select: none;
+  pointer-events: none;
+}
+
+.overlay-ojo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.88);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  border-radius: 10px;
+  z-index: 10;
+  padding: 15px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.overlay-ojo.oculto {
+  display: none !important;
+}
+
+.icono-ojo {
+  font-size: 2.2rem;
+  margin-bottom: 6px;
+}
+
+.btn-revelar {
+  background-color: var(--rojo);
+  color: var(--crema);
+  border: 2px solid var(--dorado);
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.btn-revelar:hover {
+  background-color: var(--dorado);
+  color: #000;
+}

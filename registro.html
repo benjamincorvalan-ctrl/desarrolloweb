@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crear Cuenta - CineBit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Graduate&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body class="pagina-interna">
+
+  <a href="index.html" class="volver-inicio-superior"><span>←</span> Inicio</a>
+
+  <main>
+    <div class="ficha" style="max-width: 420px; margin: 40px auto; text-align: left;">
+      <h2 style="text-align: center; color: var(--dorado);">Crear Cuenta</h2>
+
+      <form id="formRegistro" style="display: flex; flex-direction: column; gap: 10px;">
+        <label>Nombre de usuario:</label>
+        <input id="usuario" type="text" required>
+
+        <label>Contraseña:</label>
+        <input id="clave" type="password" required>
+
+        <label>Fecha de nacimiento:</label>
+        <input id="fechaNac" type="date" style="font-family: inherit;" required>
+
+        <p id="mensaje" style="color: var(--dorado); text-align: center; font-weight: bold;"></p>
+
+        <button type="submit" style="margin-top: 10px;">Registrarme</button>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    const formRegistro = document.getElementById("formRegistro");
+    const msg = document.getElementById("mensaje");
+
+    if (formRegistro) {
+      formRegistro.onsubmit = (e) => {
+        e.preventDefault();
+        const u = formRegistro.usuario.value.trim();
+        const c = formRegistro.clave.value;
+        const f = formRegistro.fechaNac.value; // Formato YYYY-MM-DD
+
+        if (!u || !c || !f) {
+          if (msg) msg.textContent = "Completa todos los campos";
+          return;
+        }
+
+        const usuarios = JSON.parse(localStorage.getItem("usuarios") || "{}");
+        if (usuarios[u]) {
+          if (msg) msg.textContent = "El usuario ya existe";
+          return;
+        }
+
+        // 1. Guardar usuario en la base de datos local
+        usuarios[u] = { clave: c, fechaNacimiento: f };
+        localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+        // 2. Iniciar sesión automáticamente con la fecha registrada
+        localStorage.setItem("sesion", u);
+        localStorage.setItem("userBirthdate", f);
+
+        if (msg) {
+          msg.style.color = "#4caf50";
+          msg.textContent = "¡Cuenta creada! Redirigiendo...";
+        }
+
+        // 3. Volver al inicio
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 800);
+      };
+    }
+  </script>
+</body>
+</html>

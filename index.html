@@ -23,15 +23,13 @@
             <input id="usuario" placeholder="Nombre de usuario" required> <!-- required = no se puede dejar vacío -->
             <input id="clave" type="password" placeholder="Contraseña" required> <!-- type=password oculta los puntos -->
             <button type="submit">Entrar</button>               <!-- envía el formulario = iniciar sesión -->
-            <button type="button" id="registrar">Crear cuenta</button> <!-- type=button no envía; lo maneja JS -->
+            <a href="registro.html" style = "display: block; text-align: center; margin-top: 10px; font-size: 0.85rem; color: var(--dorado); text-decoration: underline;">¿No tienes cuenta?</a>
           </form>
           <p id="mensaje"></p>                                  <!-- aquí JS escribe errores o éxito -->
+          <button type="button" id="salir" hidden>Cerrar sesión</button> <!-- oculto hasta iniciar sesión -->
+          <button type="button" id="perfil" hidden>Ver perfil</button>
           <p><a href="guest.html">Entrar como invitado</a></p>   <!-- acceso sin cuenta -->
         </div>
-        <section>
-        <button type="button" id="cuenta" hidden> Ver Perfil</button>
-        <button type="button" id="salir" hidden>Cerrar sesión</button> <!-- oculto hasta iniciar sesión -->
-        </section>
       </details>   <!-- cajita de sesión: esquina superior derecha del panel -->
     <h1><img class="logo" src="logo.png" alt="Logo CineBit">Películas épicas 777</h1> <!-- título principal con logo -->
     <p>Donde la magia del cine es mágica</p>                  <!-- eslogan -->
@@ -61,9 +59,24 @@
     <div class="carrusel-caja">                               <!-- contiene flechas y carrusel -->
       <button class="flecha" id="izq">‹</button>              <!-- flecha izquierda (id para usarla en JS) -->
       <div class="carrusel" id="carrusel">                    <!-- lista horizontal -->
+        <!-- The Truman Show (1998). Al hacer clic abre su HTML propio. -->
+        <a class="tarjeta" href="the-truman-show.html" data-titulo="the truman show" data-genero="drama comedia cienciaficcion">
+          <img src="https://pastposters.com/cdn/shop/files/truman-show-cinema-one-sheet-movie-poster-_1_1932d0e1-8a56-48ad-909a-93e888ce279f.jpg?v=1746699208" alt="Portada de The Truman Show"> <!-- Foto del afiche. -->
+          <span>The Truman Show (1998)</span> <!-- Nombre y año. -->
+        </a>
         <a class="tarjeta" href="shrek.html" data-titulo = "shrek" data-genero = "fantasia comedia">                 <!-- tarjeta: toda es un enlace a la ficha -->
           <img src="https://m.media-amazon.com/images/M/MV5BN2FkMTRkNTUtYTI0NC00ZjI4LWI5MzUtMDFmOGY0NmU2OGY1XkEyXkFqcGc@._V1_.jpg" alt="Shrek"> <!-- afiche -->
           <span>Shrek (2001)</span>                           <!-- título bajo el afiche -->
+        </a>
+         <!-- Coraline y la puerta secreta (2009). Al hacer clic abre su HTML propio. -->
+        <a class="tarjeta" href="coraline.html" data-titulo="coraline y la puerta secreta" data-genero="animacion fantasia terror">
+          <img src="https://cdn.posteritati.com/posters/000/000/053/066/coraline-md-web.jpg" alt="Portada de Coraline y la puerta secreta"> <!-- Foto del afiche. -->
+          <span>Coraline y la puerta secreta (2009)</span> <!-- Nombre y año. -->
+        </a>
+        <!-- Spider-Man: A través del Spider-Verso (2023). Al hacer clic abre su HTML propio. -->
+        <a class="tarjeta" href="spiderman-spider-verso.html" data-titulo="spider-man: a través del spider-verso" data-genero="accion animacion aventura">
+          <img src="https://pixieposters.co.uk/cdn/shop/files/spiderman_14_-gigapixel-standard-height-2480px.jpg?v=1714059878" alt="Portada de Spider-Man: A través del Spider-Verso"> <!-- Foto del afiche. -->
+          <span>Spider-Man: A través del Spider-Verso (2023)</span> <!-- Nombre y año. -->
         </a>
         <a class="tarjeta" href="minion.html" data-titulo = "minions nace un villano" data-genero = "comedia accion">                <!-- segunda tarjeta -->
           <img src="https://m.media-amazon.com/images/I/81ffeOxg3gL._AC_UF1000,1000_QL80_.jpg" alt="Minions"> <!-- afiche -->
@@ -83,16 +96,6 @@
         <a class="tarjeta" href="obsesion.html" data-titulo="obsesión" data-genero="terror suspenso romance">
           <img src="https://www.impawards.com/2026/posters/obsession_ver6_xlg.jpg" alt="Portada de Obsesión"> <!-- Foto del afiche. -->
           <span>Obsesión (2025)</span> <!-- Nombre y año. -->
-        </a>
-        <!-- Spider-Man: A través del Spider-Verso (2023). Al hacer clic abre su HTML propio. -->
-        <a class="tarjeta" href="spiderman-spider-verso.html" data-titulo="spider-man: a través del spider-verso" data-genero="accion animacion aventura">
-          <img src="https://pixieposters.co.uk/cdn/shop/files/spiderman_14_-gigapixel-standard-height-2480px.jpg?v=1714059878" alt="Portada de Spider-Man: A través del Spider-Verso"> <!-- Foto del afiche. -->
-          <span>Spider-Man: A través del Spider-Verso (2023)</span> <!-- Nombre y año. -->
-        </a>
-        <!-- The Truman Show (1998). Al hacer clic abre su HTML propio. -->
-        <a class="tarjeta" href="the-truman-show.html" data-titulo="the truman show" data-genero="drama comedia cienciaficcion">
-          <img src="https://pastposters.com/cdn/shop/files/truman-show-cinema-one-sheet-movie-poster-_1_1932d0e1-8a56-48ad-909a-93e888ce279f.jpg?v=1746699208" alt="Portada de The Truman Show"> <!-- Foto del afiche. -->
-          <span>The Truman Show (1998)</span> <!-- Nombre y año. -->
         </a>
         <!-- Resident Evil (2026). Al hacer clic abre su HTML propio. -->
         <a class="tarjeta" href="resident-evil.html" data-titulo="resident evil" data-genero="terror accion suspenso">
@@ -139,11 +142,6 @@
           <img src="https://i.ebayimg.com/00/s/MTYwMFgxMDg3/z/wawAAOSwzbxnYpdE/%24_57.JPG?set_id=880000500F" alt="Portada de Orgullo y prejuicio"> <!-- Foto del afiche. -->
           <span>Orgullo y prejuicio (2005)</span> <!-- Nombre y año. -->
         </a>
-        <!-- Coraline y la puerta secreta (2009). Al hacer clic abre su HTML propio. -->
-        <a class="tarjeta" href="coraline.html" data-titulo="coraline y la puerta secreta" data-genero="animacion fantasia terror">
-          <img src="https://cdn.posteritati.com/posters/000/000/053/066/coraline-md-web.jpg" alt="Portada de Coraline y la puerta secreta"> <!-- Foto del afiche. -->
-          <span>Coraline y la puerta secreta (2009)</span> <!-- Nombre y año. -->
-        </a>
         <!-- Iron Man (2008). Al hacer clic abre su HTML propio. -->
         <a class="tarjeta" href="ironman.html" data-titulo="iron man" data-genero="accion aventura cienciaficcion">
           <img src="https://filmartgallery.com/cdn/shop/products/Iron-Man-Vintage-Movie-Poster-Original_5000x.jpg?v=1771946434" alt="Portada de Iron Man"> <!-- Foto del afiche. -->
@@ -163,13 +161,20 @@
       <button class="flecha" id="der">›</button>              <!-- flecha derecha -->
     </div>
 
+    <!-- 2.º carrusel: ranking según las estrellas de las reseñas. El JavaScript de abajo lo llena. -->
+    <h2 id="tituloPositivas">Top 10 películas con reseñas más positivas</h2>
+    <div class="carrusel-caja" id="cajaPositivas"></div>
+
+    <!-- 3.º carrusel: ranking de un género (por defecto, terror). El JavaScript de abajo lo llena. -->
+    <h2 id="tituloGenero">Top 10 de películas de terror</h2>
+    <div class="carrusel-caja" id="cajaGenero"></div>
+
   </main>
 
   <footer>                                                    <!-- pie de página -->
     <a href="about.html">Más información sobre la página</a>  <!-- enlace a "Quiénes somos" -->
     <p>Películas épicas 2026</p>                              <!-- derechos -->
   </footer>
-
-  <script src="todo.js"></script>
+  <script src="base.js"></script>
 </body>
 </html>

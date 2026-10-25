@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Graduate&amp;display=swap" rel="stylesheet"> <!-- Fuente de los títulos. -->
   <link rel="stylesheet" href="estilo.css"> <!-- Usa TU mismo archivo CSS. -->
 </head>
-<body data-pelicula="viernes13" data-titulo="Viernes 13" class="pagina-interna">
+<body data-pelicula="viernes13" class="pagina-interna">
   <!-- Flecha superior: siempre visible y devuelve al menú principal, sin borrar los enlaces inferiores. -->
   <a class="volver-inicio-superior" href="index.html" aria-label="Volver al menú principal">
     <span aria-hidden="true">←</span> Inicio
@@ -63,12 +63,24 @@
     <!-- Tercera columna: reseñas que ya utiliza resenas.js. -->
     <section class="resenas"> <!-- Formulario de reseñas que ya utilizas. -->
     <h2>Reseñas</h2>
+    <div id = "filtro-edad-contenedor" data-edad="18" class="advertencia-contenido ">
+      <span><strong>Advertencia:</strong> Contiene violencia explícita</span>
+    </div>
+
     <form id="formResena" hidden> <!-- resenas.js lo muestra solo con sesión iniciada. -->
       <textarea name="texto" rows="4" maxlength="500" placeholder="Escribe tu reseña..." required></textarea> <!-- Texto del usuario. -->
       <button type="submit">Publicar reseña</button> <!-- Envía la reseña. -->
     </form>
     <p id="avisoResena">Inicia sesión para escribir una reseña. <a href="index.html">Ir a iniciar sesión</a></p> <!-- Aviso sin sesión. -->
-    <div id="listaResenas"></div> <!-- Aquí se mostrarán las reseñas. -->
+    <!-- Ocultar películas por filtro de edad -->
+    <div style="position: relative; min-height: 120px;">
+      <div id = "overlayOjo" class = "overlay-ojo oculto">
+        <span class = "icono-ojo">👁️</span>
+        <p>Película clasificada para mayores de edad</p>
+        <button class="btn-revelar" type="button" onclick="desbloquearReseñas()">Ignorar y ver reseñas</button>
+      </div>
+      <div id="listaResenas"></div> <!-- Aquí se mostrarán las reseñas. -->
+    </div>
   </section>
   </div> <!-- Fin de las tres columnas: portada, tráiler y reseñas. -->
 

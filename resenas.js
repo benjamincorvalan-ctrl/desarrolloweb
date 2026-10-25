@@ -1,33 +1,84 @@
-// ---------- 1. FLECHA "←" DENTRO DEL PANEL ROJO DEL TÍTULO (vuelve al inicio) ----------
-const cab = document.querySelector(".cabecera");          // panel rojo del título de la ficha (null si la página no lo tiene)
-const flecha = document.createElement("a");               // crea el enlace
-flecha.className = "flecha-volver";                       // clase del CSS (botón redondo)
-flecha.href = "index.html";                               // lleva a la página principal
-flecha.textContent = "←";                                 // dibujo de la flecha
-flecha.title = "Volver al inicio";                        // texto al dejar el mouse encima
-flecha.setAttribute("aria-label", "Volver a la página principal"); // descripción para lectores de pantalla
-if (cab) {                                                // si existe el panel rojo:
-  cab.classList.add("con-flecha");                        // marca el panel para dejarle espacio a la flecha
-  cab.prepend(flecha);                                    // pone la flecha dentro, al principio (esquina superior izquierda)
-} else {                                                  // si la página no tiene panel rojo:
-  const barra = document.createElement("div");            // crea una fila superior de respaldo
-  barra.className = "barra-superior";                     // clase del CSS que la acomoda
-  barra.append(flecha);                                   // mete la flecha en la fila
-  document.body.prepend(barra);                           // pone la fila al principio de la página
+// ---------- 1. FLECHA SUPERIOR "← Inicio" (una sola, arriba a la izquierda) ----------
+if (!document.querySelector(".volver-inicio-superior")) { // solo la crea si la página NO trae ya la suya en el HTML
+  const volver = document.createElement("a");             // crea el enlace
+  volver.className = "volver-inicio-superior";            // misma clase (mismo diseño) que usan tus fichas
+  volver.href = "index.html";                             // lleva a la página principal
+  volver.setAttribute("aria-label", "Volver al menú principal"); // descripción para lectores de pantalla
+  volver.innerHTML = '<span aria-hidden="true">←</span> Inicio'; // flecha + palabra "Inicio"
+  document.body.classList.add("pagina-interna");          // deja espacio arriba para que la flecha no tape el título
+  document.body.prepend(volver);                          // la pone al principio de la página
+}
+// ---------- 1.2 CALCULAR EDAD DEL USUARIO ----------
+function obtenerEdadUsuario(fechaStr) {
+  if (!fechaStr) return 99; // Si hay sesión activa pero no hay fecha guardada, no bloquea al usuario
+  const hoy = new Date();
+  const nac = new Date(fechaStr.includes("T") ? fechaStr : fechaStr + "T00:00:00");
+  let edad = hoy.getFullYear() - nac.getFullYear();
+  const mes = hoy.getMonth() - nac.getMonth();
+  if (mes < 0 || (mes === 0 && hoy.getDate() < nac.getDate())) {
+    edad--;
+  }
+  return edad;
 }
 
 // ---------- 2. DATOS DE LA PÁGINA ----------
 const peli = document.body.dataset.pelicula;              // nombre de la película, desde <body data-pelicula="...">
-const tituloPeli = document.body.dataset.titulo;
 const sesion = localStorage.getItem("sesion");            // usuario con sesión iniciada (null si no hay)
+let fechaNacimiento = localStorage.getItem("userBirthdate");
+if (!fechaNacimiento && sesion) {
+  const usuarios = JSON.parse(localStorage.getItem("usuarios") || "{}");
+  if (usuarios[sesion] && usuarios[sesion].fechaNacimiento) {
+    fechaNacimiento = usuarios[sesion].fechaNacimiento;
+    localStorage.setItem("userBirthdate", fechaNacimiento);
+  }
+}
+const contenedorFiltro = document.getElementById("filtro-edad-contenedor"); // Busca el contenedor con la restricción de edad de la película
+const edadMinima = contenedorFiltro ? parseInt(contenedorFiltro.getAttribute("data-edad") || "0", 10) : 0; // Valor numérico de data-edad
+const edadUsuario = obtenerEdadUsuario(fechaNacimiento); // Calcula la edad del usuario
+
 const todas = JSON.parse(localStorage.getItem("resenas") || "{}"); // todas las reseñas guardadas, agrupadas por película
 const lista = todas[peli] || [];                          // reseñas de ESTA película
+const fichas = JSON.parse(localStorage.getItem("fichas") || "{}"); // registro de qué archivo es cada película (lo usa la portada para los rankings)
+if (peli){
+  fichas[peli] = location.pathname.split("/").pop(); // anota el archivo, ej: "shrek"  →  "shrek.html"
+  localStorage.setItem("fichas", JSON.stringify(fichas)); // Guarda en el navegador
+}
 const form = document.getElementById("formResena");       // formulario para escribir la reseña
 const aviso = document.getElementById("avisoResena");     // mensaje para quien no ha iniciado sesión
 const caja = document.getElementById("listaResenas");     // lugar donde se muestran las reseñas
+const overlayOjo = document.getElementById("overlayOjo"); 
 
-form.hidden = !sesion;                                    // el formulario se ve SOLO con sesión
-aviso.hidden = !!sesion;                                  // el aviso se ve SOLO sin sesión
+// ---------- 2.1 FORMULARIO SEGÚN EDAD ----------  COMENTARIOSAFKJDASLFKJSDLFJKSDLKFJSLDFJSLDFKJ
+const esMenor = sesion ? (edadUsuario < edadMinima) : false;
+
+// A) Bloqueo visual de reseñas para menores
+if (esMenor && edadMinima > 0) {
+  if (caja) caja.classList.add("reseñas-bloqueadas");
+  if (overlayOjo) overlayOjo.classList.remove("oculto");
+} else {
+  if (caja) caja.classList.remove("reseñas-bloqueadas");
+  if (overlayOjo) overlayOjo.classList.add("oculto");
+}
+
+// B) Habilitar o deshabilitar formulario de publicar reseñas
+if (sesion && !esMenor) {
+  if (form) form.hidden = false;
+  if (aviso) aviso.hidden = true;
+} else {
+  if (form) form.hidden = true;
+  if (aviso) {
+    aviso.hidden = false;
+    if (sesion && esMenor) {
+      aviso.innerHTML = "⛔ <strong>Publicación restringida:</strong> Tu cuenta no cumple con la edad mínima para esta película.";
+    } else {
+      aviso.innerHTML = 'Inicia sesión para escribir una reseña. <a href="index.html">Ir a iniciar sesión</a>';
+    }
+  }
+}
+function desbloquearReseñas() {
+  if (caja) caja.classList.remove("reseñas-bloqueadas");
+  if (overlayOjo) overlayOjo.classList.add("oculto");
+}
 
 // ---------- 3. DIBUJAR ESTRELLAS ----------
 function estrellas(n) {                                   // devuelve n estrellas doradas y (5 - n) grises
@@ -53,16 +104,16 @@ const error = document.createElement("p");                // párrafo para avisa
 error.className = "error-resena";                         // clase del CSS (texto rojo claro)
 
 if (fichaForm) {                                          // si la página tiene las estrellas originales
-  if (sesion) {                                           // y hay sesión iniciada:
+  if (sesion && !esMenor) {                                           // y hay sesión iniciada:
     while (fichaForm.firstChild) selector.append(fichaForm.firstChild); // mueve tus estrellas (inputs y labels) al nuevo contenedor
   }
   fichaForm.remove();                                     // quita el formulario original de la ficha
 }
-if (sesion) {                                             // con sesión, las estrellas van DENTRO del formulario de reseña
+if (sesion && !esMenor) {                                             // con sesión, las estrellas van DENTRO del formulario de reseña
   const etiqueta = document.createElement("p");           // título pequeño sobre las estrellas
   etiqueta.className = "etiqueta-estrellas";              // clase del CSS
   etiqueta.textContent = "Tu calificación:";              // texto
-  form.prepend(etiqueta, selector, error);                // orden: título, estrellas, aviso, y luego la caja de texto
+  if(form)form.prepend(etiqueta, selector, error);                // orden: título, estrellas, aviso, y luego la caja de texto
   selector.onchange = () => { error.textContent = ""; };  // al elegir estrellas, borra el aviso de error
 }
 
@@ -94,6 +145,7 @@ function guardar() {                                      // guarda los cambios 
 
 function mostrar() {                                      // dibuja la lista de reseñas
   mostrarPromedio();                                      // primero actualiza el promedio de la ficha
+  if(!caja) return;
   caja.innerHTML = "";                                    // borra lo que había
   if (!lista.length) { caja.textContent = "Aún no hay reseñas. ¡Sé el primero!"; return; } // mensaje si no hay ninguna
   lista.forEach((r, i) => {                               // repite para cada reseña (r = reseña, i = posición)
@@ -128,7 +180,8 @@ function mostrar() {                                      // dibuja la lista de 
   });
 }
 
-form.onsubmit = (e) => {                                  // al publicar la reseña
+if(form){
+  form.onsubmit = (e) => {                                  // al publicar la reseña
   e.preventDefault();                                     // evita que se recargue la página
   const marcada = form.querySelector('input[name="rating"]:checked'); // estrella elegida (null si no eligió)
   const t = form.elements.texto.value.trim();                      // texto escrito, sin espacios sobrantes
@@ -138,12 +191,12 @@ form.onsubmit = (e) => {                                  // al publicar la rese
     autor: sesion,                                        // quién la escribió
     estrellas: Number(marcada.value),                     // cuántas estrellas puso (1 a 5)
     texto: t,                                             // el comentario
-    fecha: new Date().toLocaleDateString("es-CL"),         // fecha de hoy
-    titulo: tituloPeli
+    fecha: new Date().toLocaleDateString("es-CL")         // fecha de hoy
   });
   guardar();                                              // guarda en el navegador
   form.reset();                                           // limpia estrellas y caja de texto
   mostrar();                                              // actualiza reseñas y promedio
 };
-
+}
 mostrar();                                                // al abrir la página, muestra las reseñas existentes
+
