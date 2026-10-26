@@ -37,8 +37,3 @@ if (!sesion) {
     });
   }
 }
-
-  //pelis favoritas
-
-  const box = document.getElementById("favorites");
-  const 
