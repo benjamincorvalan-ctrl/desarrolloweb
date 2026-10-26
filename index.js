@@ -74,6 +74,13 @@
     };
     }
     
+    const btnPerfil = document.getElementById("perfil");
+    if(btnPerfil){
+      btnPerfil.onclick = () => {
+        window.location.href = "user.html";
+      }
+    }
+
     mostrarSesion();                                          // al abrir la página, revisa si ya había sesión
 
     // SCRIPT DE LOS RANKINGS (2.º y 3.º carrusel)
