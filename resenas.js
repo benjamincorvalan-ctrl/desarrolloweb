@@ -24,6 +24,7 @@ function obtenerEdadUsuario(fechaStr) {
 // ---------- 2. DATOS DE LA PÁGINA ----------
 const peli = document.body.dataset.pelicula;              // nombre de la película, desde <body data-pelicula="...">
 const sesion = localStorage.getItem("sesion");            // usuario con sesión iniciada (null si no hay)
+const tituloPeli = document.body.dataset.titulo;
 let fechaNacimiento = localStorage.getItem("userBirthdate");
 if (!fechaNacimiento && sesion) {
   const usuarios = JSON.parse(localStorage.getItem("usuarios") || "{}");
@@ -191,12 +192,14 @@ if(form){
     autor: sesion,                                        // quién la escribió
     estrellas: Number(marcada.value),                     // cuántas estrellas puso (1 a 5)
     texto: t,                                             // el comentario
-    fecha: new Date().toLocaleDateString("es-CL")         // fecha de hoy
+    fecha: new Date().toLocaleDateString("es-CL"),         // fecha de hoy
+    titulo: tituloPeli
   });
   guardar();                                              // guarda en el navegador
   form.reset();                                           // limpia estrellas y caja de texto
   mostrar();                                              // actualiza reseñas y promedio
 };
 }
+
 mostrar();                                                // al abrir la página, muestra las reseñas existentes
 
