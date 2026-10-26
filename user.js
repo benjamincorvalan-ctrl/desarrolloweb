@@ -29,9 +29,6 @@ if (!sesion) {
       const titulo = document.createElement("strong");      //titulo y fecha
       titulo.textContent = `${r.titulo || r.pelicula} · ${r.fecha}`;
 
-      const puntuacion = document.createElement("div");
-      div.append(estrellas(r.estrellas));
-
       const texto = document.createElement("p");      //texto de la reseña
       texto.textContent = r.texto;
 
