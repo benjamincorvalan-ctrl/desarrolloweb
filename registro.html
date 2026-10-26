@@ -2,75 +2,77 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Adapta la visualización de la página según el acho de la pantalla -->
   <title>Crear Cuenta - CineBit</title>
-  <link href="https://fonts.googleapis.com/css2?family=Graduate&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="estilo.css">
+  <link href="https://fonts.googleapis.com/css2?family=Graduate&display=swap" rel="stylesheet"> <!-- Importa la tipografría -->
+  <link rel="stylesheet" href="estilo.css"> <!-- Conecta el archivo con el css de estilo para que el diseño se vea igual-->
 </head>
-<body class="pagina-interna">
+<body class="pagina-interna"> <!-- Abre el cuerpo de la página-->
 
-  <a href="index.html" class="volver-inicio-superior"><span>←</span> Inicio</a>
+  <a href="index.html" class="volver-inicio-superior"><span>←</span> Inicio</a> <!-- Enlace para vovler a la página de inicio -->
 
   <main>
-    <div class="ficha" style="max-width: 420px; margin: 40px auto; text-align: left;">
-      <h2 style="text-align: center; color: var(--dorado);">Crear Cuenta</h2>
+    <div class="ficha" style="max-width: 420px; margin: 40px auto; text-align: left;"> <!-- Contenedor para agrupar elementos del formulario -->
+      <h2 style="text-align: center; color: var(--dorado);">Crear Cuenta</h2> <!-- Encabezado -->
 
-      <form id="formRegistro" style="display: flex; flex-direction: column; gap: 10px;">
-        <label>Nombre de usuario:</label>
-        <input id="usuario" type="text" required>
+      <form id="formRegistro" style="display: flex; flex-direction: column; gap: 10px;"> <!-- Formulario para que el usuario se registre-->
+        <label>Nombre de usuario:</label>  <!-- Etiqueta descriptiva -->
+        <input id="usuario" type="text" required> <!-- Campo para el nombre de usuario, el "required" indica que este debe de ser obligatorio-->
 
-        <label>Contraseña:</label>
-        <input id="clave" type="password" required>
+        <label>Contraseña:</label> <!-- Etiqueta descriptiva -->
+        <input id="clave" type="password" required> <!-- Contraseña, al igual que el de usuario, es oblñigatorio-->
 
-        <label>Fecha de nacimiento:</label>
-        <input id="fechaNac" type="date" style="font-family: inherit;" required>
+        <label>Fecha de nacimiento:</label> <!-- Etiqueta descriptiva -->
+        <input id="fechaNac" type="date" style="font-family: inherit;" required> <!-- Agrega la fecha de nacimiento para posteriormente aplicar filtros de edad. Es obligatoria -->
 
-        <p id="mensaje" style="color: var(--dorado); text-align: center; font-weight: bold;"></p>
+        <p id="mensaje" style="color: var(--dorado); text-align: center; font-weight: bold;"></p> <!-- Párrafo vacío momentaneamente que se utilizará para mostrar menajes al usuario ("Cuenta creada", "cuenta existente", etc)-->
 
-        <button type="submit" style="margin-top: 10px;">Registrarme</button>
+        <button type="submit" style="margin-top: 10px;">Registrarme</button> <!-- Botón para registrarse, el "submit" indica que se debe de enviar el formulario, al activarlo (presionar el botón) JS gestionará posteriormente el proceso-->
       </form>
     </div>
   </main>
 
   <script>
-    const formRegistro = document.getElementById("formRegistro");
-    const msg = document.getElementById("mensaje");
+    const formRegistro = document.getElementById("formRegistro"); // Busca el archivo HTML a través de un identifiacdor y lo guarda en una variable
+    const msg = document.getElementById("mensaje");  // Permite mostrar mensajes ya sean de error o exíto
 
-    if (formRegistro) {
-      formRegistro.onsubmit = (e) => {
-        e.preventDefault();
-        const u = formRegistro.usuario.value.trim();
-        const c = formRegistro.clave.value;
-        const f = formRegistro.fechaNac.value; // Formato YYYY-MM-DD
+    if (formRegistro){ // Comprueba que existe el formulario de registro
+      formRegistro.onsubmit = (e) => { // Define la acción que se ejecutará al enviar el formulario después de presionar el boón de registro
+        e.preventDefault(); // Evita que la pagina se recargue
 
-        if (!u || !c || !f) {
-          if (msg) msg.textContent = "Completa todos los campos";
+        // DATOS DEL USUARIO
+        const u = formRegistro.usuario.value.trim();  // Obtiene el nombre de usuario. Elimina los espacios en blanco al principio y final del texto escrito por el usuario
+        const c = formRegistro.clave.value; // Obtiene la contraseña guardada por el usuario, se conservan los espacios en blanco -> Cambiar a futuro(?)
+        const f = formRegistro.fechaNac.value; // Formato YYYY-MM-DD (año - mes - día)
+
+        if (!u || !c || !f){ // Verifica que todos los campos requeridos estén rellenados
+          if (msg) msg.textContent = "Completa todos los campos"; // En caso de que no lo estén, se muestra el mensaje
           return;
         }
 
-        const usuarios = JSON.parse(localStorage.getItem("usuarios") || "{}");
-        if (usuarios[u]) {
-          if (msg) msg.textContent = "El usuario ya existe";
+        const usuarios = JSON.parse(localStorage.getItem("usuarios") || "{}"); // Recupera lña lista de usuarios almacenada en el navegador
+        if (usuarios[u]){ // // Verifica si el nombre del usuario ya se registró anteriormente
+          if (msg) msg.textContent = "El usuario ya existe"; // Mensaje de error en caso de que el nombre del usuario sea existente
           return;
         }
+        // Guarda al usuario en localStorage
+        usuarios[u] = { clave: c, fechaNacimiento: f }; // Agrega los datos del usuario
+        localStorage.setItem("usuarios", JSON.stringify(usuarios)); // Guarda el objeto en el mavegador. Utiliza JSON ya que localStorage almacena valores como texto
 
-        // 1. Guardar usuario en la base de datos local
-        usuarios[u] = { clave: c, fechaNacimiento: f };
-        localStorage.setItem("usuarios", JSON.stringify(usuarios));
+        // Iniciar sesión con la fecha registrada
+        localStorage.setItem("sesion", u); // Guarda la sesión creada
+        localStorage.setItem("userBirthdate", f); // Guarda la fecha de nacimiento, permite que otras funciones usen la fecha 
 
-        // 2. Iniciar sesión automáticamente con la fecha registrada
-        localStorage.setItem("sesion", u);
-        localStorage.setItem("userBirthdate", f);
-
-        if (msg) {
+        // Estilo del mensaje para cuando se cree una cuenta con éxito
+        if (msg){
           msg.style.color = "#4caf50";
           msg.textContent = "¡Cuenta creada! Redirigiendo...";
         }
 
-        // 3. Volver al inicio
-        setTimeout(() => {
-          window.location.href = "index.html";
-        }, 800);
+        //  Volver a la página de inicio. Se ejecuta una acción después de un tiempo determinado 
+        setTimeout(() => { // Ejecuta la acción después del tiempo
+          window.location.href = "index.html"; //Indica que debe de volver a la página de inicio después de ese tiempo
+        }, 1000); // El tiempo de espera en milisegundos, osea 1 segundo espera para volver a la página de inicio después de registrar una cuenta con éxito
       };
     }
   </script>

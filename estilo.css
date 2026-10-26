@@ -496,21 +496,11 @@ body.pagina-interna {
 .mensaje-carrusel { padding: 20px; background: var(--rojo-oscuro); border: 4px solid #000; border-radius: 10px; font-size: 0.95rem; } /* aviso cuando aún no hay datos para el ranking */
 
 
-/* ===== BADGES Y OVERLAY DE EDAD ===== */
-.badge-edad {
-  display: inline-block;
-  padding: 4px 8px;
-  background-color: var(--rojo);
-  color: #fff;
-  font-weight: bold;
-  border-radius: 4px;
-  margin-right: 8px;
-  font-size: 0.85rem;
-  border: 1px solid var(--dorado);
-}
+/* ===== OVERLAY DE EDAD ===== */
 
+/* -- MENSAJE DE ADVERTENCIA POR RESTRICCIÓN DE EDAD -- */
 .advertencia-contenido {
-  background-color: #000;
+  background-color: #000; 
   border-left: 4px solid var(--rojo);
   padding: 10px;
   margin: 12px 0;
@@ -519,21 +509,23 @@ body.pagina-interna {
   font-size: 0.9rem;
 }
 
-.reseñas-bloqueadas {
-  filter: blur(8px);
-  user-select: none;
-  pointer-events: none;
+/* -- BLOQUEO VISUAL DE LAS RESEÑAS (SOLO VISUAL, SIGUE EXISTIENDO) -- */
+.reseñas-bloqueadas { 
+  filter: blur(8px); /* Aplica el filtro de borroso / desenfoque al elemento */
+  user-select: none; /* Impide que el usuario pueda seleccionar las reseñas */
+  pointer-events: none; /* En caso de que dentro de las reseñas exista algún botón por ejemplo (en este caso si), el usuario no pueda interactuar con ese elemento */
 }
 
+/* -- CAPA SOBRE EL CONTENIDO OCULTO -- */
 .overlay-ojo {
-  position: absolute;
+  position: absolute; /* Permite poner el elemento en una ubicación dentro de su contenedor respectivo */
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.88);
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Organiza los elementos verticalmente uno debajo del otro */
   align-items: center;
   justify-content: center;
   color: #fff;
@@ -544,27 +536,30 @@ body.pagina-interna {
   text-align: center;
 }
 
-.overlay-ojo.oculto {
+/* -- CAPA QUE OCULTA LA CAPA XD ANTERIOR -- */
+.overlay-ojo.oculto { /* Aparecen dos clases sin espacio entre ellas, la instrucción se va a aplicar a un mismo elemento que tenga ambas clases */
+  /* Permite mostrar o ocultar la capa de restricción */
   display: none !important;
 }
 
+/* -- DISEÑO DEL ÍCONO EN LA CAPA DE RESTRICCIÓN -- */
 .icono-ojo {
   font-size: 2.2rem;
   margin-bottom: 6px;
 }
 
+/* -- DISEÑO DEL BOTÓN PARA REVELAR EL CONTENIDO OCULTO -- */
 .btn-revelar {
   background-color: var(--rojo);
   color: var(--crema);
   border: 2px solid var(--dorado);
   padding: 8px 16px;
-  cursor: pointer;
   border-radius: 6px;
   font-weight: bold;
   margin-top: 10px;
 }
 
 .btn-revelar:hover {
-  background-color: var(--dorado);
+  background-color: var(--dorado); /* Aplica el diseño de cuando el cursor está sobre el botón */
   color: #000;
 }

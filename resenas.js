@@ -9,14 +9,14 @@ if (!document.querySelector(".volver-inicio-superior")) { // solo la crea si la 
   document.body.prepend(volver);                          // la pone al principio de la página
 }
 // ---------- 1.2 CALCULAR EDAD DEL USUARIO ----------
-function obtenerEdadUsuario(fechaStr) {
-  if (!fechaStr) return 99; // Si hay sesión activa pero no hay fecha guardada, no bloquea al usuario
-  const hoy = new Date();
-  const nac = new Date(fechaStr.includes("T") ? fechaStr : fechaStr + "T00:00:00");
-  let edad = hoy.getFullYear() - nac.getFullYear();
-  const mes = hoy.getMonth() - nac.getMonth();
-  if (mes < 0 || (mes === 0 && hoy.getDate() < nac.getDate())) {
-    edad--;
+function obtenerEdadUsuario(fechaStr){
+  if (!fechaStr) return 99; // Si no existe la fecha de nacimiento, devuelve 99 como valor determinado para que el usuario no se bloquee
+  const hoy = new Date(); // Obtiene la fecha actual (y hora) del sistema para el calculo de la edad el usuario
+  const nac = new Date(fechaStr.includes("T") ? fechaStr : fechaStr + "T00:00:00"); // La T se utiliza para separar la fecha actual de la hora
+  let edad = hoy.getFullYear() - nac.getFullYear(); // Calcula la edad restando el año actual - el año de nacimiento del usuario. Se utiliza "let" porque esta variable podrá cambiar
+  const mes = hoy.getMonth() - nac.getMonth(); // Calcula la diferencia entre los meses actuales y los de nacimiento
+  if (mes < 0 || (mes === 0 && hoy.getDate() < nac.getDate())){ // Comprueba si el usuario ya estuvo de cumpleaños este año actual. Si la diferencia de los meses es < 0, todavía no es el cumpleaños del usuario.
+    edad--; // Si el usuario aún no ha estado de cumpleaños, le restamos la edad en 1 (esto porque si estuvo de cumpleaños el 2006, en diciembre, y estamos a 2026, en octubre, aún no ha cumplido los 20)
   }
   return edad;
 }
@@ -25,12 +25,12 @@ function obtenerEdadUsuario(fechaStr) {
 const peli = document.body.dataset.pelicula;              // nombre de la película, desde <body data-pelicula="...">
 const sesion = localStorage.getItem("sesion");            // usuario con sesión iniciada (null si no hay)
 const tituloPeli = document.body.dataset.titulo;
-let fechaNacimiento = localStorage.getItem("userBirthdate");
-if (!fechaNacimiento && sesion) {
-  const usuarios = JSON.parse(localStorage.getItem("usuarios") || "{}");
-  if (usuarios[sesion] && usuarios[sesion].fechaNacimiento) {
-    fechaNacimiento = usuarios[sesion].fechaNacimiento;
-    localStorage.setItem("userBirthdate", fechaNacimiento);
+let fechaNacimiento = localStorage.getItem("userBirthdate"); // Busca la fecha de cumpleaños almacenada, si no lo encuentra, la variable valdría null
+if (!fechaNacimiento && sesion){ // Si no hay una fecha de cumpleaños guardada pero si una sesión iniciada..
+  const usuarios = JSON.parse(localStorage.getItem("usuarios") || "{}"); // La parte de JSON covierte el texto almacenado en un objeto JS para poder acceder a los datos
+  if (usuarios[sesion] && usuarios[sesion].fechaNacimiento) { // Revisa que el usuario sea el mismo de la sesión iniciada actual y si es que este tiene una fecha de nacimiento guardada
+    fechaNacimiento = usuarios[sesion].fechaNacimiento; // Si se cumple lo anterior, se copia la fecha de nacimiento del usuario a una variable
+    localStorage.setItem("userBirthdate", fechaNacimiento); // Guarda la fecha en el navegador
   }
 }
 const contenedorFiltro = document.getElementById("filtro-edad-contenedor"); // Busca el contenedor con la restricción de edad de la película
@@ -49,36 +49,33 @@ const aviso = document.getElementById("avisoResena");     // mensaje para quien 
 const caja = document.getElementById("listaResenas");     // lugar donde se muestran las reseñas
 const overlayOjo = document.getElementById("overlayOjo"); 
 
-// ---------- 2.1 FORMULARIO SEGÚN EDAD ----------  COMENTARIOSAFKJDASLFKJSDLFJKSDLKFJSLDFJSLDFKJ
-const esMenor = sesion ? (edadUsuario < edadMinima) : false;
-
-// A) Bloqueo visual de reseñas para menores
-if (esMenor && edadMinima > 0) {
-  if (caja) caja.classList.add("reseñas-bloqueadas");
-  if (overlayOjo) overlayOjo.classList.remove("oculto");
-} else {
-  if (caja) caja.classList.remove("reseñas-bloqueadas");
-  if (overlayOjo) overlayOjo.classList.add("oculto");
+// ---------- 2.1 FORMULARIO SEGÚN EDAD ----------  
+const esMenor = sesion ? (edadUsuario < edadMinima) : false; // Indica si el usuario tiene una edad menor a la requerida por la película
+if (esMenor && edadMinima > 0){ // Comprueba que efectivamente el usuario es menor a la edad mínima requerida y que esta debe ser mayor que 0
+  // BLOQUEO VISUAL DE LAS RESEÑAS
+  if(caja) caja.classList.add("reseñas-bloqueadas"); // Entra la parte de estilo css para cambiar la aparencia de las reseñas
+  if(overlayOjo) overlayOjo.classList.remove("oculto"); // Quita la parte de ocultar en las reseñas
+}else{ 
+  if (caja) caja.classList.remove("reseñas-bloqueadas"); // Elimina la clase de reseñas-bloquedas, lo opuesto a lo anterior
+  if (overlayOjo) overlayOjo.classList.add("oculto"); // Agrega la parte de ocultar
 }
-
-// B) Habilitar o deshabilitar formulario de publicar reseñas
-if (sesion && !esMenor) {
-  if (form) form.hidden = false;
-  if (aviso) aviso.hidden = true;
-} else {
-  if (form) form.hidden = true;
-  if (aviso) {
-    aviso.hidden = false;
-    if (sesion && esMenor) {
-      aviso.innerHTML = "⛔ <strong>Publicación restringida:</strong> Tu cuenta no cumple con la edad mínima para esta película.";
-    } else {
-      aviso.innerHTML = 'Inicia sesión para escribir una reseña. <a href="index.html">Ir a iniciar sesión</a>';
+if (sesion && !esMenor){ // Verifica si el usuario puede escribir o no una reseña
+  if (form) form.hidden = false;  // Muestra el formulario si se inició sesión y tiene más de la edad mínima requerida
+  if (aviso) aviso.hidden = true; // Como efectivamente puede escribir una reseña, se oculta el aviso de inicio de sesión
+}else{ // Revisión de caso en el que el usuario no pueda escribir la reseña por restricción de edad o no tiene un inicio de sesión
+  if (form) form.hidden = true; // Oculta el formulario 
+  if (aviso){ // Comprueba si existe el aviso
+    aviso.hidden = false; // Muestra el aviso
+    if (sesion && esMenor){ // Verifica que el usuario tenga sesión iniciada y que no cumple con la edad mínima requerida 
+      aviso.innerHTML = "<strong>Publicación restringida:</strong> Tu cuenta no cumple con la edad mínima para esta película."; // Mensaje de restricción
+    }else{ // Revisión en el caso de que el usuario no haya iniciado sesión
+      aviso.innerHTML = 'Inicia sesión para escribir una reseña. <a href="index.html">Ir a iniciar sesión</a>'; // Mensaje de inicio de sesión para poder escribir la reseña
     }
   }
 }
-function desbloquearReseñas() {
-  if (caja) caja.classList.remove("reseñas-bloqueadas");
-  if (overlayOjo) overlayOjo.classList.add("oculto");
+function desbloquearReseñas(){ 
+  if (caja) caja.classList.remove("reseñas-bloqueadas"); // Desbloquea las reseñas para poder verlas
+  if (overlayOjo) overlayOjo.classList.add("oculto"); // Desbloquea la parte del ojo que hace que las reseñas se vean bloqueadas
 }
 
 // ---------- 3. DIBUJAR ESTRELLAS ----------
@@ -200,6 +197,5 @@ if(form){
   mostrar();                                              // actualiza reseñas y promedio
 };
 }
-
 mostrar();                                                // al abrir la página, muestra las reseñas existentes
 

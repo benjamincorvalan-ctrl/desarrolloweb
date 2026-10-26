@@ -73,8 +73,13 @@
         }
     </style>
 </head>
-<body>
-    <header class="cabecera con-flecha"><a class="flecha-volver" href="index.html" title="Volver al inicio" aria-label="Volver a la página principal">←</a> <!-- flecha ← dentro del panel rojo -->
+<body class="pagina-interna">
+  <!-- Flecha superior: siempre visible y devuelve al menú principal, sin borrar los enlaces inferiores. -->
+  <a class="volver-inicio-superior" href="index.html" aria-label="Volver al menú principal">
+    <span aria-hidden="true">←</span> Inicio
+  </a>
+
+    <header class="cabecera">
         <h1><img class="logo" src= "logo.png" alt = "Logo CineBit"> Películas épicas 777</h1>
         <p> Cátalogo de películas</p>
     </header>
@@ -105,7 +110,7 @@
             <span>Shrek (2001)</span>
             </a>
             <a class = "tarjeta" href = "minion.html" data-titulo="minions nace un villano" data-genero="accion comedia">
-            <span>Miions: Nace un villano (2022)</span>
+            <span>Minions: Nace un villano (2022)</span>
             </a>
             <a class = "tarjeta" href = "salchicha.html" data-titulo="la fiesta de las salchichas" data-genero="comedia">
             <span>La fiesta de las salchichas</span>
