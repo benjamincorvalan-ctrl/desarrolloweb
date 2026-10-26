@@ -7,23 +7,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Graduate&display=swap" rel="stylesheet"> <!-- tipografía de títulos -->
   <link rel="stylesheet" href="estilo.css">                   <!-- estilos compartidos -->
 </head>
-<body class="pagina-interna">
-  <!-- Flecha superior: siempre visible y devuelve al menú principal, sin borrar los enlaces inferiores. -->
-  <a class="volver-inicio-superior" href="index.html" aria-label="Volver al menú principal">
-    <span aria-hidden="true">←</span> Inicio
-  </a>
-
+<body>
   <header class="cabecera"><h1>Perfil</h1></header>           <!-- título -->
   <section class="perfil">                                    <!-- tarjeta del usuario -->
     <img class="avatar" src="https://static.vecteezy.com/system/resources/previews/009/734/564/non_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg" alt="Avatar"> <!-- foto redonda -->
-    <h3>Invitado</h3>                                         <!-- nombre -->
+    <h3 id="nombre">texto</h3>                                         <!-- nombre -->
   </section>
-  <h2>Lista de favoritos</h2>                                 <!-- subtítulo -->
-  <ol class="favoritos">                                      <!-- lista numerada -->
-    <li>Película 1</li>
-    <li>Película 2</li>
-    <li>Película 3</li>
-  </ol>
+    <h2>Lista de favoritos</h2>                                 <!-- lista favoritos en progreso -->
+    <div id="favorites">
+    </div>
+  <section>
+    <h2>Lista de reseñas</h2>                                   <!-- Lista de reseñas (en user.js)-->
+    <div id="reviews">
+    </div>
+  </section>
   <a class="volver" href="index.html">Volver a la página principal</a>
+  <script src="user.js"></script>
 </body>
 </html>
