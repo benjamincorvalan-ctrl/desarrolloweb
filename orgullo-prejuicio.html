@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Graduate&amp;display=swap" rel="stylesheet"> <!-- Fuente de los títulos. -->
   <link rel="stylesheet" href="estilo.css"> <!-- Usa TU mismo archivo CSS. -->
 </head>
-<body data-pelicula="orgullo" data-titulo="Orgullo y prejuicio" class="pagina-interna">
+<body data-pelicula="orgullo" data-tiutlo="Orgullo y prejuicio" class="pagina-interna">
   <!-- Flecha superior: siempre visible y devuelve al menú principal, sin borrar los enlaces inferiores. -->
   <a class="volver-inicio-superior" href="index.html" aria-label="Volver al menú principal">
     <span aria-hidden="true">←</span> Inicio
@@ -63,6 +63,8 @@
     <!-- Tercera columna: reseñas que ya utiliza resenas.js. -->
     <section class="resenas"> <!-- Formulario de reseñas que ya utilizas. -->
     <h2>Reseñas</h2>
+
+    
     <form id="formResena" hidden> <!-- resenas.js lo muestra solo con sesión iniciada. -->
       <textarea name="texto" rows="4" maxlength="500" placeholder="Escribe tu reseña..." required></textarea> <!-- Texto del usuario. -->
       <button type="submit">Publicar reseña</button> <!-- Envía la reseña. -->

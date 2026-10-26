@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Graduate&display=swap" rel="stylesheet"> <!-- tipografía de títulos -->
   <link rel="stylesheet" href="estilo.css">                   <!-- estilos compartidos -->
 </head>
-<body data-pelicula="elchacotero" data-titulo="El chacotero sentimental" class="pagina-interna">
+<body data-pelicula="elchacotero" data-titulo="El chacotero setimental" class="pagina-interna">
   <!-- Flecha superior: siempre visible y devuelve al menú principal, sin borrar los enlaces inferiores. -->
   <a class="volver-inicio-superior" href="index.html" aria-label="Volver al menú principal">
     <span aria-hidden="true">←</span> Inicio
@@ -63,11 +63,27 @@
     <!-- Tercera columna: reseñas que ya utiliza resenas.js. -->
     <section class="resenas">                                   <!-- tarjeta de reseñas -->
     <h2>Reseñas</h2>
+
+    <!-- Edad mínima requeria de la película y advertencia de contenido -->
+    <div id = "filtro-edad-contenedor" data-edad="18" class="advertencia-contenido ">
+      <span><strong>Advertencia:</strong> Lenguaje vulgar, referencias sexuales</span>
+    </div>
+
+
     <form id="formResena" hidden>                             <!-- solo se muestra con sesión iniciada (lo decide resenas.js) -->
       <textarea name="texto" rows="4" maxlength="500" placeholder="Escribe tu reseña..." required></textarea> <!-- máx. 500 letras -->
       <button type="submit">Publicar reseña</button>
     </form>
     <p id="avisoResena">Inicia sesión para escribir una reseña. <a href="index.html">Ir a iniciar sesión</a></p> <!-- se muestra sin sesión -->
+
+        <!-- Ocultar reseñas  por filtro de edad -->
+    <div style="position: relative; min-height: 120px;">
+      <div id = "overlayOjo" class = "overlay-ojo oculto">
+        <span class = "icono-ojo">👁️</span>
+        <p>Película clasificada para mayores de edad</p>
+        <button class="btn-revelar" type="button" onclick="desbloquearReseñas()">Ignorar y ver reseñas</button>
+      </div>
+
     <div id="listaResenas"></div>                             <!-- aquí aparecen las reseñas -->
   </section>
   </div> <!-- Fin de las tres columnas: portada, tráiler y reseñas. -->

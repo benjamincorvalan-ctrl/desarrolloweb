@@ -5,8 +5,8 @@ document.getElementById("nombre").textContent = pan ? pan : "Texto";
 
 const sesion = localStorage.getItem("sesion");    //busca sesion
 const todas = JSON.parse(localStorage.getItem("resenas") || "{}");    //agarra TODAS las reseñas existentes
-const caja = document.getElementById("reviews");      //crea el lugar donde pondra las reseñas
-const titulo = document.body.dataset.titulo;      //titulo de la peli
+const caja = document.getElementById("reviews");      //recibe el lugar donde pondra las reseñas
+const titulo = document.body.dataset.titulo;      //recibe titulo de la peli
 
 caja.textContent = "";
 
@@ -37,3 +37,7 @@ if (!sesion) {
     });
   }
 }
+
+  //pelis favoritas
+
+  const box = document.getElementById("favorites");
