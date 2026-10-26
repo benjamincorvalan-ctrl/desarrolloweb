@@ -6,7 +6,7 @@ document.getElementById("nombre").textContent = pan ? pan : "Texto";
 const sesion = localStorage.getItem("sesion");    //busca sesion
 const todas = JSON.parse(localStorage.getItem("resenas") || "{}");    //agarra TODAS las reseñas existentes
 const caja = document.getElementById("reviews");      //recibe el lugar donde pondra las reseñas
-const title = document.body.dataset.title;      //recibe titulo de la peli
+const titulo = document.body.dataset.title;      //recibe titulo de la peli
 
 caja.textContent = "";
 
